@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="food_stories@localhost">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.4">
+    <root id="1"/>
+    <database id="2" parent="1" name="food_stories">
+      <ObjectId>16880</ObjectId>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <database id="3" parent="1" name="postgres">
+      <ObjectId>12401</ObjectId>
+    </database>
+    <database id="4" parent="1" name="UNIVER2017">
+      <ObjectId>16393</ObjectId>
+    </database>
+    <schema id="5" parent="2" name="public">
+      <ObjectId>2200</ObjectId>
+      <IntrospectionTimestamp>2017-11-04.15:45:21.663</IntrospectionTimestamp>
+      <IntrospectionStateNumber>691</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="6" parent="2" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+    </schema>
+    <schema id="7" parent="2" name="pg_toast">
+      <ObjectId>99</ObjectId>
+    </schema>
+    <schema id="8" parent="2" name="pg_temp_1">
+      <ObjectId>11848</ObjectId>
+    </schema>
+    <schema id="9" parent="2" name="pg_toast_temp_1">
+      <ObjectId>11849</ObjectId>
+    </schema>
+    <schema id="10" parent="2" name="information_schema">
+      <ObjectId>12113</ObjectId>
+    </schema>
+    <sequence id="11" parent="5" name="comment_id_seq">
+      <ObjectId>16919</ObjectId>
+      <StateNumber>672</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+    </sequence>
+    <sequence id="12" parent="5" name="photo_id_seq">
+      <ObjectId>16900</ObjectId>
+      <StateNumber>671</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+    </sequence>
+    <sequence id="13" parent="5" name="post_id_seq">
+      <ObjectId>16908</ObjectId>
+      <StateNumber>671</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+    </sequence>
+    <sequence id="14" parent="5" name="resources_id_seq">
+      <ObjectId>16930</ObjectId>
+      <StateNumber>672</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+    </sequence>
+    <sequence id="15" parent="5" name="style_id_seq">
+      <ObjectId>16949</ObjectId>
+      <StateNumber>673</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+    </sequence>
+    <sequence id="16" parent="5" name="tag_id_seq">
+      <ObjectId>16941</ObjectId>
+      <StateNumber>673</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+    </sequence>
+    <sequence id="17" parent="5" name="type_id_seq">
+      <ObjectId>16957</ObjectId>
+      <StateNumber>673</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+    </sequence>
+    <sequence id="18" parent="5" name="user_id_seq">
+      <ObjectId>16881</ObjectId>
+      <StateNumber>662</StateNumber>
+      <SequenceIdentity>1</SequenceIdentity>
+      <BelongsToColumn>1</BelongsToColumn>
+    </sequence>
+    <table id="19" parent="5" name="comment">
+      <ObjectId>16921</ObjectId>
+      <StateNumber>691</StateNumber>
+    </table>
+    <table id="20" parent="5" name="fav_food">
+      <ObjectId>17026</ObjectId>
+      <StateNumber>681</StateNumber>
+    </table>
+    <table id="21" parent="5" name="photo">
+      <ObjectId>16902</ObjectId>
+      <StateNumber>679</StateNumber>
+    </table>
+    <table id="22" parent="5" name="post">
+      <ObjectId>16910</ObjectId>
+      <StateNumber>691</StateNumber>
+    </table>
+    <table id="23" parent="5" name="post_comment">
+      <ObjectId>17094</ObjectId>
+      <StateNumber>691</StateNumber>
+    </table>
+    <table id="24" parent="5" name="post_photo">
+      <ObjectId>16987</ObjectId>
+      <StateNumber>677</StateNumber>
+    </table>
+    <table id="25" parent="5" name="post_style">
+      <ObjectId>17060</ObjectId>
+      <StateNumber>685</StateNumber>
+    </table>
+    <table id="26" parent="5" name="post_tags">
+      <ObjectId>17000</ObjectId>
+      <StateNumber>678</StateNumber>
+    </table>
+    <table id="27" parent="5" name="res_type">
+      <ObjectId>17047</ObjectId>
+      <StateNumber>683</StateNumber>
+    </table>
+    <table id="28" parent="5" name="resources">
+      <ObjectId>16932</ObjectId>
+      <StateNumber>683</StateNumber>
+    </table>
+    <table id="29" parent="5" name="status">
+      <ObjectId>16966</ObjectId>
+      <StateNumber>675</StateNumber>
+    </table>
+    <table id="30" parent="5" name="style">
+      <ObjectId>16951</ObjectId>
+      <StateNumber>685</StateNumber>
+    </table>
+    <table id="31" parent="5" name="tag">
+      <ObjectId>16943</ObjectId>
+      <StateNumber>681</StateNumber>
+    </table>
+    <table id="32" parent="5" name="type">
+      <ObjectId>16959</ObjectId>
+      <StateNumber>683</StateNumber>
+    </table>
+    <table id="33" parent="5" name="user">
+      <ObjectId>16883</ObjectId>
+      <StateNumber>687</StateNumber>
+    </table>
+    <table id="34" parent="5" name="user_comment">
+      <ObjectId>17081</ObjectId>
+      <StateNumber>687</StateNumber>
+    </table>
+    <table id="35" parent="5" name="user_photo">
+      <ObjectId>17013</ObjectId>
+      <StateNumber>679</StateNumber>
+    </table>
+    <table id="36" parent="5" name="user_posts">
+      <ObjectId>16974</ObjectId>
+      <StateNumber>676</StateNumber>
+    </table>
+    <column id="37" parent="19" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>672</StateNumber>
+      <SequenceName>comment_id_seq</SequenceName>
+      <DefaultExpression>nextval(&apos;comment_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="38" parent="19" name="_text">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+      <StateNumber>672</StateNumber>
+    </column>
+    <column id="39" parent="19" name="_date">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+      <StateNumber>672</StateNumber>
+    </column>
+    <index id="40" parent="19" name="comment_pkey">
+      <ObjectId>16928</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="41" parent="19" name="comment_pkey">
+      <ObjectId>16929</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>comment_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="42" parent="20" name="user_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>681</StateNumber>
+    </column>
+    <column id="43" parent="20" name="tag_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>681</StateNumber>
+    </column>
+    <foreign-key id="44" parent="20" name="fav_food_user_id_fkey">
+      <ObjectId>17029</ObjectId>
+      <ColNames>user_id</ColNames>
+      <RefTableId>16883</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>user</RefTableName>
+      <RefKeyName>user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="45" parent="20" name="fav_food_tag_id_fkey">
+      <ObjectId>17034</ObjectId>
+      <ColNames>tag_id</ColNames>
+      <RefTableId>16943</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tag</RefTableName>
+      <RefKeyName>tag_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="46" parent="21" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>671</StateNumber>
+      <SequenceName>photo_id_seq</SequenceName>
+      <DefaultExpression>nextval(&apos;photo_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="47" parent="21" name="photo">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+      <StateNumber>671</StateNumber>
+    </column>
+    <column id="48" parent="21" name="_date">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+      <StateNumber>671</StateNumber>
+    </column>
+    <index id="49" parent="21" name="photo_pkey">
+      <ObjectId>16906</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="50" parent="21" name="photo_pkey">
+      <ObjectId>16907</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>photo_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="51" parent="22" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>671</StateNumber>
+      <SequenceName>post_id_seq</SequenceName>
+      <DefaultExpression>nextval(&apos;post_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="52" parent="22" name="_text">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+      <StateNumber>671</StateNumber>
+    </column>
+    <column id="53" parent="22" name="_date">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+      <StateNumber>671</StateNumber>
+    </column>
+    <column id="54" parent="22" name="likes">
+      <Position>4</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>671</StateNumber>
+    </column>
+    <index id="55" parent="22" name="post_pkey">
+      <ObjectId>16917</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="56" parent="22" name="post_pkey">
+      <ObjectId>16918</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>post_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="57" parent="23" name="post_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>691</StateNumber>
+    </column>
+    <column id="58" parent="23" name="comment_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>691</StateNumber>
+    </column>
+    <foreign-key id="59" parent="23" name="post_comment_post_id_fkey">
+      <ObjectId>17097</ObjectId>
+      <ColNames>post_id</ColNames>
+      <RefTableId>16910</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>post</RefTableName>
+      <RefKeyName>post_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="60" parent="23" name="post_comment_comment_id_fkey">
+      <ObjectId>17102</ObjectId>
+      <ColNames>comment_id</ColNames>
+      <RefTableId>16921</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>comment</RefTableName>
+      <RefKeyName>comment_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="61" parent="24" name="post_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>677</StateNumber>
+    </column>
+    <column id="62" parent="24" name="photo_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>677</StateNumber>
+    </column>
+    <foreign-key id="63" parent="24" name="post_photo_post_id_fkey">
+      <ObjectId>16990</ObjectId>
+      <ColNames>post_id</ColNames>
+      <RefTableId>16910</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>post</RefTableName>
+      <RefKeyName>post_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="64" parent="24" name="post_photo_photo_id_fkey">
+      <ObjectId>16995</ObjectId>
+      <ColNames>photo_id</ColNames>
+      <RefTableId>16902</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>photo</RefTableName>
+      <RefKeyName>photo_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="65" parent="25" name="post_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>685</StateNumber>
+    </column>
+    <column id="66" parent="25" name="style_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>685</StateNumber>
+    </column>
+    <foreign-key id="67" parent="25" name="post_style_post_id_fkey">
+      <ObjectId>17063</ObjectId>
+      <ColNames>post_id</ColNames>
+      <RefTableId>16910</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>post</RefTableName>
+      <RefKeyName>post_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="68" parent="25" name="post_style_style_id_fkey">
+      <ObjectId>17068</ObjectId>
+      <ColNames>style_id</ColNames>
+      <RefTableId>16951</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>style</RefTableName>
+      <RefKeyName>style_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="69" parent="26" name="post_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>678</StateNumber>
+    </column>
+    <column id="70" parent="26" name="tag_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>678</StateNumber>
+    </column>
+    <foreign-key id="71" parent="26" name="post_tags_post_id_fkey">
+      <ObjectId>17003</ObjectId>
+      <ColNames>post_id</ColNames>
+      <RefTableId>16910</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>post</RefTableName>
+      <RefKeyName>post_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="72" parent="26" name="post_tags_tag_id_fkey">
+      <ObjectId>17008</ObjectId>
+      <ColNames>tag_id</ColNames>
+      <RefTableId>16943</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tag</RefTableName>
+      <RefKeyName>tag_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="73" parent="27" name="res_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>683</StateNumber>
+    </column>
+    <column id="74" parent="27" name="type_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>683</StateNumber>
+    </column>
+    <foreign-key id="75" parent="27" name="res_type_res_id_fkey">
+      <ObjectId>17050</ObjectId>
+      <ColNames>res_id</ColNames>
+      <RefTableId>16932</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>resources</RefTableName>
+      <RefKeyName>resources_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="76" parent="27" name="res_type_type_id_fkey">
+      <ObjectId>17055</ObjectId>
+      <ColNames>type_id</ColNames>
+      <RefTableId>16959</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>type</RefTableName>
+      <RefKeyName>type_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="77" parent="28" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>672</StateNumber>
+      <SequenceName>resources_id_seq</SequenceName>
+      <DefaultExpression>nextval(&apos;resources_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="78" parent="28" name="link">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+      <StateNumber>672</StateNumber>
+    </column>
+    <column id="79" parent="28" name="description">
+      <Position>3</Position>
+      <DataType>text|0</DataType>
+      <StateNumber>672</StateNumber>
+    </column>
+    <index id="80" parent="28" name="resources_pkey">
+      <ObjectId>16939</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="81" parent="28" name="resources_pkey">
+      <ObjectId>16940</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>resources_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="82" parent="29" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>675</StateNumber>
+    </column>
+    <column id="83" parent="29" name="status">
+      <Position>2</Position>
+      <DataType>boolean|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>675</StateNumber>
+    </column>
+    <foreign-key id="84" parent="29" name="status_id_fkey">
+      <ObjectId>16969</ObjectId>
+      <ColNames>id</ColNames>
+      <RefTableId>16883</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>user</RefTableName>
+      <RefKeyName>user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="85" parent="30" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>673</StateNumber>
+      <SequenceName>style_id_seq</SequenceName>
+      <DefaultExpression>nextval(&apos;style_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="86" parent="30" name="style">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+      <StateNumber>673</StateNumber>
+    </column>
+    <index id="87" parent="30" name="style_pkey">
+      <ObjectId>16955</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="88" parent="30" name="style_pkey">
+      <ObjectId>16956</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>style_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="89" parent="31" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>673</StateNumber>
+      <SequenceName>tag_id_seq</SequenceName>
+      <DefaultExpression>nextval(&apos;tag_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="90" parent="31" name="tag">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+      <StateNumber>673</StateNumber>
+    </column>
+    <index id="91" parent="31" name="tag_pkey">
+      <ObjectId>16947</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="92" parent="31" name="tag_pkey">
+      <ObjectId>16948</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>tag_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="93" parent="32" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>673</StateNumber>
+      <SequenceName>type_id_seq</SequenceName>
+      <DefaultExpression>nextval(&apos;type_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="94" parent="32" name="_type">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+      <StateNumber>673</StateNumber>
+    </column>
+    <index id="95" parent="32" name="type_pkey">
+      <ObjectId>16963</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="96" parent="32" name="type_pkey">
+      <ObjectId>16964</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>type_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="97" parent="33" name="id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>662</StateNumber>
+      <SequenceName>user_id_seq</SequenceName>
+      <DefaultExpression>nextval(&apos;user_id_seq&apos;::regclass)</DefaultExpression>
+    </column>
+    <column id="98" parent="33" name="login">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+      <StateNumber>662</StateNumber>
+    </column>
+    <column id="99" parent="33" name="password">
+      <Position>3</Position>
+      <DataType>varchar(30)|0</DataType>
+      <StateNumber>662</StateNumber>
+    </column>
+    <column id="100" parent="33" name="name">
+      <Position>4</Position>
+      <DataType>varchar(30)|0</DataType>
+      <StateNumber>662</StateNumber>
+    </column>
+    <column id="101" parent="33" name="email">
+      <Position>5</Position>
+      <DataType>varchar(30)|0</DataType>
+      <StateNumber>662</StateNumber>
+    </column>
+    <column id="102" parent="33" name="birthday">
+      <Position>6</Position>
+      <DataType>date|0</DataType>
+      <StateNumber>662</StateNumber>
+    </column>
+    <column id="103" parent="33" name="city">
+      <Position>7</Position>
+      <DataType>varchar(30)|0</DataType>
+      <StateNumber>662</StateNumber>
+    </column>
+    <column id="104" parent="33" name="registred">
+      <Position>8</Position>
+      <DataType>date|0</DataType>
+      <StateNumber>662</StateNumber>
+    </column>
+    <index id="105" parent="33" name="user_pkey">
+      <ObjectId>16887</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="106" parent="33" name="user_pkey">
+      <ObjectId>16888</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>user_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="107" parent="34" name="user_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>687</StateNumber>
+    </column>
+    <column id="108" parent="34" name="comment_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>687</StateNumber>
+    </column>
+    <foreign-key id="109" parent="34" name="user_comment_user_id_fkey">
+      <ObjectId>17084</ObjectId>
+      <ColNames>user_id</ColNames>
+      <RefTableId>16883</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>user</RefTableName>
+      <RefKeyName>user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="110" parent="34" name="user_comment_comment_id_fkey">
+      <ObjectId>17089</ObjectId>
+      <ColNames>comment_id</ColNames>
+      <RefTableId>16921</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>comment</RefTableName>
+      <RefKeyName>comment_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="111" parent="35" name="user_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>679</StateNumber>
+    </column>
+    <column id="112" parent="35" name="photo_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>679</StateNumber>
+    </column>
+    <foreign-key id="113" parent="35" name="user_photo_user_id_fkey">
+      <ObjectId>17016</ObjectId>
+      <ColNames>user_id</ColNames>
+      <RefTableId>16883</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>user</RefTableName>
+      <RefKeyName>user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="114" parent="35" name="user_photo_photo_id_fkey">
+      <ObjectId>17021</ObjectId>
+      <ColNames>photo_id</ColNames>
+      <RefTableId>16902</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>photo</RefTableName>
+      <RefKeyName>photo_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="115" parent="36" name="user_id">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>676</StateNumber>
+    </column>
+    <column id="116" parent="36" name="post_id">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+      <StateNumber>676</StateNumber>
+    </column>
+    <foreign-key id="117" parent="36" name="user_posts_user_id_fkey">
+      <ObjectId>16977</ObjectId>
+      <ColNames>user_id</ColNames>
+      <RefTableId>16883</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>user</RefTableName>
+      <RefKeyName>user_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="118" parent="36" name="user_posts_post_id_fkey">
+      <ObjectId>16982</ObjectId>
+      <ColNames>post_id</ColNames>
+      <RefTableId>16910</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>post</RefTableName>
+      <RefKeyName>post_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>
