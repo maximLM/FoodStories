@@ -14,15 +14,15 @@ public class AuthFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
-        resp.setContentType("text/html");
+//        resp.setContentType("text/html");
         HttpServletRequest r = (HttpServletRequest) req;
-        if (r.getSession().getAttribute("current_user") != null) {
+        if (r.getSession().getAttribute("current_user") != null || r.getRequestURI().equals("/login")) {
             chain.doFilter(req, resp);
         }
         else {
             ((HttpServletResponse)resp).sendRedirect("/login");
         }
-        chain.doFilter(req, resp);
+//        chain.doFilter(req, resp);
     }
 
     @Override
