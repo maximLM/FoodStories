@@ -11,7 +11,7 @@ import static main_package.Helper.toCalendar;
 
 public class UserDao {
 
-    public boolean existsWithLogin(String login) {
+    public static boolean existsWithLogin(String login) {
         Connection conn = DBConnection.getConnection();
 
         try {
@@ -25,7 +25,7 @@ public class UserDao {
         return false;
     }
 
-    public User getUserByLoginAndPass(String login, String pass) {
+    public static User getUserByLoginAndPass(String login, String pass) {
         Connection conn = DBConnection.getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM \"user\" " +
@@ -56,20 +56,20 @@ public class UserDao {
     }
 
 
-    public User createUser(String login,
-                           String password,
-                           String name,
-                           String email,
-                           Calendar birthday,
-                           String city,
-                           Calendar registred) {
+    public static User createUser(String login,
+                                  String password,
+                                  String name,
+                                  String email,
+                                  Calendar birthday,
+                                  String city,
+                                  Calendar registred) {
         Connection conn = DBConnection.getConnection();
         try {
             java.sql.Date dateB = new java.sql.Date(birthday.getTime().getTime());
             java.sql.Date dateR = new java.sql.Date(registred.getTime().getTime());
             PreparedStatement ps = conn.prepareStatement("INSERT INTO \"user\" (login, password, name, email, birthday, city, registred) " +
-            "VALUES(?, ?, ?, ?, ?, ?, ?)");
-            ps.setString(1,login);
+                    "VALUES(?, ?, ?, ?, ?, ?, ?)");
+            ps.setString(1, login);
             ps.setString(2, password);
             ps.setString(3, name);
             ps.setString(4, email);
@@ -83,7 +83,7 @@ public class UserDao {
         return getUserByLoginAndPass(login, password);
     }
 
-    private int getAdminId() {
+    private static int getAdminId() {
         int id = -1;
         Connection conn = DBConnection.getConnection();
         try {
@@ -95,5 +95,34 @@ public class UserDao {
             e.printStackTrace();
         }
         return id;
+    }
+
+    public static User getUserById(int id) {
+        Connection conn = DBConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM \"user\" " +
+                    "WHERE id = ?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) return null;
+            int ind = 0;
+            User user = new User(rs.getInt(++ind),
+                    rs.getString(++ind),
+                    rs.getString(++ind),
+                    rs.getString(++ind),
+                    rs.getString(++ind),
+                    toCalendar(rs.getDate(++ind)),
+                    rs.getString(++ind),
+                    toCalendar(rs.getDate(++ind)),
+                    false
+            );
+            ind = 0;
+            if (getAdminId() == user.getId()) user.setAdmin(true);
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

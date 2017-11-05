@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -12,16 +13,19 @@ public class Post {
     private List<Tag> tags;
     private List<Comment> comments;
 
-    public Post(int id, String text, Calendar date, int likes, List<Photo> photos, List<Tag> tags, List<Comment> comments) {
+    public Post(int id, String text, Calendar date, int likes) {
         this.id = id;
         this.text = text;
         this.date = date;
         this.likes = likes;
-        this.photos = photos;
-        this.tags = tags;
-        this.comments = comments;
+        tags = new ArrayList<>();
+        comments = new ArrayList<>();
+        photos = new ArrayList<>();
     }
 
+    public void addTag(Tag tag) {
+        tags.add(tag);
+    }
     public int getId() {
         return id;
     }
@@ -76,5 +80,9 @@ public class Post {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public void addComment(Comment comment) {
+
     }
 }
