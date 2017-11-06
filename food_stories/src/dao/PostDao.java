@@ -21,7 +21,7 @@ public class PostDao {
         Connection conn = DBConnection.getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "SELECT (\"post\".id, \"post\"._text, \"post\"._date, \"post\".likes) FROM\n" +
+                    "SELECT \"post\".id, \"post\"._text, \"post\"._date, \"post\".likes FROM\n" +
                             "  (\"tag\" JOIN \"post_tags\" ON \"tag\".id = \"post_tags\".tag_id) AS\n" +
                             "  tagpost JOIN  \"post\" ON tagpost.post_id = \"post\".id\n" +
                             "  WHERE tagpost.tag_id = ?"
@@ -50,7 +50,7 @@ public class PostDao {
         Connection conn = DBConnection.getConnection();
         try {
             PreparedStatement prepareStatement = conn.prepareStatement(
-                    "SELECT (\"post\".id, \"post\"._text, \"post\"._date, \"post\".likes) FROM\n" +
+                    "SELECT \"post\".id, \"post\"._text, \"post\"._date, \"post\".likes FROM\n" +
                             "  (\"user\" JOIN \"user_posts\" ON \"user\".id = \"user_posts\".user_id)\n" +
                             "    AS kek  JOIN \"post\" ON kek.post_id = \"post\".id\n" +
                             "    WHERE kek.id = ? ORDER BY kek.id ASC;"

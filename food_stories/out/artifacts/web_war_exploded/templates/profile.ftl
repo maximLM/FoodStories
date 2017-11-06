@@ -48,11 +48,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#">
-                        <img src="static/icons/header-search.png" style="height: 40px; width:40px" class="img-responsive">
+                        <span class=" glyphicon glyphicon-user" >
+                        </span>
                     </a>
 
                 </li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Выйти</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-out" ></span>Выйти</a></li>
             </ul>
 
         </div>
@@ -73,7 +74,7 @@
 
 
     </div>
-<form  method="POST" >
+<form method="POST">
     <div class="input-group">
         <span class="input-group-addon">Имя</span>
         <input id="name" type="text" class="form-control" name="name" value="${user.name}">
@@ -99,7 +100,7 @@
         <input id="food" type="text" class="form-control" name="food" value="TODO">
     </div>
     <div align="center">
-        <input type="submit"   value="Подтвердить">
+        <input type="submit"  value="Подтвердить">
     </div>
 </form>
 

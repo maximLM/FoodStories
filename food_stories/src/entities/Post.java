@@ -8,6 +8,7 @@ public class Post {
     private int id;
     private String text;
     private Calendar date;
+    private User author;
     private int likes;
     private List<Photo> photos;
     private List<Tag> tags;
@@ -23,9 +24,11 @@ public class Post {
         photos = new ArrayList<>();
     }
 
-    public void addTag(Tag tag) {
-        tags.add(tag);
+    @Override
+    public String toString() {
+        return "id = " + id + "\ntext = " + text + "\nlikes = " + likes + "\n";
     }
+
     public int getId() {
         return id;
     }
@@ -84,5 +87,13 @@ public class Post {
 
     public void addComment(Comment comment) {
 
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

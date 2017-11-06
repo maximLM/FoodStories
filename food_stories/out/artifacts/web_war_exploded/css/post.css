@@ -88,7 +88,7 @@ textarea {
     box-shadow: 0 0 50px 5px rgba(0,0,0,.25);
     height: auto;
     margin: 30px auto 40px;
-    max-width: 500px;
+    max-width: 100%;
     overflow: hidden;
     padding: 20px 0 0;
     position: relative;
@@ -266,7 +266,7 @@ textarea {
 }
 .container > .box > .box-likes > .row:last-child > span {
     display: inline-block;
-    verrtical-align: middle;
+    vertical-align: middle;
 }
 .container > .box > .box-likes > .row img {
     border-radius: 100px;
@@ -307,7 +307,7 @@ textarea {
     margin: 0;
     *outline: 1px #08F;
     padding: 0;
-    width: 33.33333333333%;
+    width: 50%;
 }
 .container > .box > .box-buttons > .row > button:hover {
     background: #F5F5F5;
@@ -493,6 +493,9 @@ textarea {
 }
 .container > .box.text > .box-buttons > .row > button {
     font-size: 13px;
+    text-align: center;
+    align-content: center;
+    vertical-align: middle;
 }
 .container > .box.text > .box-buttons > .row > button > span {
     font-size: 20px;
@@ -510,3 +513,15 @@ textarea {
 .container > .box.image > .box-new-comment > .content:active > .row {background: #FFF;}
 .container > .box > .box-new-comment > .content > .row > textarea:focus,
 .container > .box.video  .box-new-comment > .content:active > .row {background: #FFF;}
+.tag {
+    width:20px;
+    height:15px;
+    display:inline-block;
+    *dsplay:inline;/* For IE7*/
+    *zoom:1;/* For IE7*/
+    white-space:normal;
+    padding: 5px;
+}
+.tag-container{
+
+}

@@ -1,5 +1,11 @@
 package main_package;
 
+import dao.CommentDao;
+import dao.PostDao;
+import dao.TagDao;
+import dao.UserDao;
+import entities.Post;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -11,5 +17,14 @@ public class Helper {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         return cal;
+    }
+
+    public static Post getFullPost(int id) {
+        Post post = PostDao.getPostById(id);
+        if (post == null) return null;
+        post.setComments(CommentDao.getCommentsByPost(post));
+        post.setTags(TagDao.getPostTags(post));
+        post.setAuthor(UserDao.getAuthor(post));
+        return post;
     }
 }

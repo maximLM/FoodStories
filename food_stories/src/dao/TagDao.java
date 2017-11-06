@@ -32,11 +32,11 @@ public class TagDao {
         return null;
     }
 
-    private static List<Tag> getPostTags(Post post) {
+    public static List<Tag> getPostTags(Post post) {
         Connection conn = DBConnection.getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "SELECT (\"tag\".id, \"tag\".tag) FROM\n" +
+                    "SELECT \"tag\".id, \"tag\".tag FROM\n" +
                             "  (\"post\" JOIN \"post_tags\" ON \"post\".id = \"post_tags\".post_id) AS\n" +
                             "  kek JOIN \"tag\" ON kek.tag_id = \"tag\".id WHERE kek.post_id = ?"
             );

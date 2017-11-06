@@ -20,7 +20,7 @@ public class CommentDao {
 
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "SELECT (\"comment\".id, \"comment\"._text, \"comment\"._date) FROM\n" +
+                    "SELECT \"comment\".id, \"comment\"._text, \"comment\"._date FROM\n" +
                             "  (\"user\" JOIN \"user_comment\" ON \"user\".id = \"user_comment\".user_id) AS\n" +
                             "  usercom JOIN \"comment\" ON usercom.comment_id = \"comment\".id\n" +
                             "  WHERE usercom.user_id = ?"
@@ -52,7 +52,7 @@ public class CommentDao {
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement(
-                    "SELECT (\"user\".id) FROM\n" +
+                    "SELECT \"user\".id FROM\n" +
                             "    \"user\" JOIN \"user_comment\" ON \"user\".id = \"user_comment\".user_id\n" +
                             "  WHERE \"user_comment\".comment_id = ?"
             );
@@ -70,7 +70,7 @@ public class CommentDao {
         Connection conn = DBConnection.getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "SELECT (\"comment\".id, \"comment\"._text, \"comment\"._date) FROM\n" +
+                    "SELECT \"comment\".id, \"comment\"._text, \"comment\"._date FROM\n" +
                             "  (\"post\" JOIN \"post_comment\" ON \"post\".id = \"post_comment\".post_id) AS\n" +
                             "  postcom JOIN \"comment\" ON postcom.comment_id = \"comment\".id\n" +
                             "  WHERE postcom.id = ?"
@@ -78,6 +78,7 @@ public class CommentDao {
             ps.setInt(1,post.getId());
             ResultSet resultSet = ps.executeQuery();
             ArrayList<Comment> ret = new ArrayList<>();
+
             while (resultSet.next()) {
                 ret.add(
                         new Comment(
@@ -103,7 +104,7 @@ public class CommentDao {
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement(
-                    "SELECT (\"user\".id) FROM\n" +
+                    "SELECT \"user\".id FROM\n" +
                             "    \"user\" JOIN \"user_comment\" ON \"user\".id = \"user_comment\".user_id\n" +
                             "  WHERE \"user_comment\".comment_id = ?"
             );

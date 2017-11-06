@@ -1,6 +1,7 @@
 package dao;
 
 import com.sun.org.apache.regexp.internal.RE;
+import entities.Post;
 import entities.User;
 
 import java.sql.*;
@@ -161,5 +162,22 @@ public class UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static User getAuthor(Post post) {
+        Connection conn = DBConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT user_id FROM\n" +
+                            "  \"user_posts\" WHERE post_id = ?"
+            );
+            ps.setInt(1, post.getId());
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) return null;
+            return getUserById(rs.getInt(1));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
