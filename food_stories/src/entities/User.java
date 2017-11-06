@@ -15,8 +15,8 @@ public class User {
 
     public User(int id,
                 String login,
-                String name,
                 String password,
+                String name,
                 String email,
                 Calendar birthday,
                 String city,
@@ -100,5 +100,9 @@ public class User {
     @Override
     public String toString() {
         return "User\nlogin = " + login + "\nname = " + name + "\nbirthday = " + birthday;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

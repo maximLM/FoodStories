@@ -65,8 +65,8 @@ public class UserDao {
                                   Calendar registred) {
         Connection conn = DBConnection.getConnection();
         try {
-            java.sql.Date dateB = new java.sql.Date(birthday.getTime().getTime());
-            java.sql.Date dateR = new java.sql.Date(registred.getTime().getTime());
+            java.sql.Date dateB = toDate(birthday);
+            java.sql.Date dateR = toDate(registred);
             PreparedStatement ps = conn.prepareStatement("INSERT INTO \"user\" (login, password, name, email, birthday, city, registred) " +
                     "VALUES(?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, login);
@@ -81,6 +81,10 @@ public class UserDao {
             e.printStackTrace();
         }
         return getUserByLoginAndPass(login, password);
+    }
+
+    public static java.sql.Date toDate(Calendar calendar) {
+        return new java.sql.Date(calendar.getTime().getTime());
     }
 
     private static int getAdminId() {
@@ -124,5 +128,38 @@ public class UserDao {
         }
 
         return null;
+    }
+
+    public static void updateUser(User user) {
+
+        Connection conn = DBConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "UPDATE \"user\" SET\n" +
+                            "  login = ?,\n" +
+                            "  password = ?,\n" +
+                            "  name = ?,\n" +
+                            "  email = ?,\n" +
+                            "  birthday = ?,\n" +
+                            "  city = ?,\n" +
+                            "  registred = ?\n" +
+                            "  WHERE id = ?"
+            );
+            int ind = 0;
+            System.out.println("USER IN DAO = " + user);
+            ps.setString(++ind, user.getLogin());
+            ps.setString(++ind, user.getPassword());
+            ps.setString(++ind, user.getName());
+            ps.setString(++ind, user.getEmail());
+            ps.setDate(++ind, toDate(user.getBirthday()));
+            ps.setString(++ind, user.getCity());
+            ps.setDate(++ind, toDate(user.getRegister()));
+            ps.setInt(++ind, user.getId());
+            ind = 0;
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

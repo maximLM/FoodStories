@@ -26,7 +26,10 @@ public class LoginServlet extends HttpServlet {
         Map<String, String[]> map = req.getParameterMap();
         User user = null;
         if (map.containsKey("name")) {
-            if (UserDao.existsWithLogin(map.get("login")[0])) resp.sendRedirect("/login");
+            if (UserDao.existsWithLogin(map.get("login")[0])) {
+                resp.sendRedirect("/login");
+                return;
+            }
             user = UserDao.createUser(map.get("login")[0],
                     map.get("password")[0],
                     map.get("name")[0],
