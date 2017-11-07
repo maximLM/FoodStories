@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        System.out.println("IN POST");
+        resp.setCharacterEncoding("UTF-8");
         Map<String, String[]> map = req.getParameterMap();
         User user = null;
         if (map.containsKey("name")) {
@@ -49,13 +49,11 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         req.getSession().setAttribute("current_user", user);
-        resp.sendRedirect("/index.jsp");
+        resp.sendRedirect("/post?id=1");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.getWriter().println("KEK IS NOT");
-        System.out.println("Вгете кекк");
         try {
             Render.render(resp, new HashMap<>(), "/login.ftl");
         } catch (TemplateException e) {

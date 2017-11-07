@@ -24,6 +24,7 @@ public class Render {
     }
 
     public static void render(HttpServletResponse response, Map<String, Object> context, String templateName) throws IOException, TemplateException {
+        response.setCharacterEncoding("UTF-8");
         Configuration cfg = getCfg();
         Template template = cfg.getTemplate(templateName);
         template.process(context, response.getWriter());

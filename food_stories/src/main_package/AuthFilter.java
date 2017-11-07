@@ -3,6 +3,7 @@ package main_package;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class AuthFilter implements Filter {
@@ -14,15 +15,27 @@ public class AuthFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
-//        resp.setContentType("text/html");
-        HttpServletRequest r = (HttpServletRequest) req;
-        if (r.getSession().getAttribute("current_user") != null || r.getRequestURI().equals("/login")) {
-            chain.doFilter(req, resp);
+
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) resp;
+        HttpSession session = request.getSession(false);
+        String loginURI = request.getContextPath() + "/login";
+
+        HttpServletRequest httpReq = (HttpServletRequest) request;
+        String path= httpReq.getRequestURI();
+        if(path.endsWith(".css") || path.endsWith(".js")){
+            chain.doFilter(request,response);
+            return;
         }
-        else {
-            ((HttpServletResponse)resp).sendRedirect("/login");
+
+        boolean loggedIn = session != null && session.getAttribute("current_user") != null;
+        boolean loginRequest = request.getRequestURI().equals(loginURI);
+
+        if (loggedIn || loginRequest) {
+            chain.doFilter(request, response);
+        } else {
+            response.sendRedirect(loginURI);
         }
-//        chain.doFilter(req, resp);
     }
 
     @Override

@@ -21,7 +21,7 @@
         <div class="box image">
             <div class="box-header">
                 <h3><a href=""><img src="https://goo.gl/oOD0V2" alt="" />${post.author.login}</a>
-                    <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
+                    <span>TODO<i class="fa fa-globe"></i></span>
                 </h3>
                 <span><i class="fa fa-angle-down"></i></span>
                 <div class="window"><span></span></div>
@@ -40,10 +40,10 @@
                         <div class="carousel-inner">
 
                             <div class="item active">
-                                <img src="static/photos/la.jpg" alt="Los Angeles" style="width:100%;">
+                                <img src="static/photos/meat.jpg" alt="Los Angeles" style="width:100%;">
                                 <div class="carousel-caption">
-                                    <h3>Los Angeles</h3>
-                                    <p>LA is always so much fun!</p>
+                                    <h3>Meat</h3>
+                                    <p>Pork is always so much fun!</p>
                                 </div>
                             </div>
 
@@ -80,63 +80,27 @@
                     <p>${post.text}</p>
                     <span><span class="fa fa-search-plus"></span></span>
                 </div>
-                <div class = "container" style="width:100%;height:30px;float:left;overflow-x:scroll;white-space:nowrap; text-align: center">
+                <div class = "container" style="width:100%;height:50px;float:left;overflow-x:scroll;white-space:nowrap; text-align: center">
+                <#list post.tags as tag>
                     <div class = "tag">
-                        <a href="#">like</a>
+                        <a href="#">${tag.tag}</a>
                     </div>
-                    <div class = "tag">
-                        <a href="#">like</a>
-                    </div>
-                    <div class = "tag">
-                        <a href="#">like</a>
-                    </div>
-                    <div class = "tag">
-                        <a href="#">like</a>
-                    </div>
-                    <div class = "tag">
-                        <a href="#">like</a>
-                    </div>
-                    <div class = "tag">
-                        <a href="#">like</a>
-                    </div>
-                    <div class = "tag">
-                        <a href="#">like</a>
-                    </div>
-                    <div class = "tag">
-                        <a href="#">like</a>
-                    </div>
-                    <div class = "tag">
-                        <a href="#">like</a>
-                    </div>
-                    <div class = "tag">
-                        <a href="#">like</a>
-                    </div>
-                    <div class = "tag">
-                        <a href="#">like</a>
-                    </div>
-                    <div class = "tag">
-                        <a href="#">like</a>
-                    </div>
-                    <div class = "tag">
-                        <a href="#">like</a>
-                    </div>
-
-
+                </#list>
                 </div>
             </div>
 
 
             <div class="box-buttons">
                 <div class="row">
-                    <button><span class="glyphicon glyphicon-heart"> </span> 99</button>
-                    <button>145 <span class="glyphicon glyphicon-comment"></span></button>
+                    <button><span class="glyphicon glyphicon-heart"> </span> ${post.likes}</button>
+                    <button>${post.comments?size} <span class="glyphicon glyphicon-comment"></span></button>
                 </div>
             </div>
             <div class="box-new-comment">
                 <img src="https://goo.gl/oOD0V2" alt="" />
                 <div class="content">
                     <div class="row">
-                        <textarea placeholder="комментарий"></textarea>
+                        <textarea placeholder="комментарий" onkeydown="send_comment()" id="snd_comm"></textarea>
                     </div>
                     <div class="row">
                         <span class="fa fa-smile-o"></span>
@@ -145,11 +109,12 @@
             </div>
 
 
-            <div class="box-comments">
+            <div class="box-comments" id="comment_container">
                 <#list post.comments as comment>
+
                 <div class="comment"><img src="https://goo.gl/oM0Y8G" alt="" />
                     <div class="content">
-                        <h3><a href="">${comment.author.login}</a><span><time> </time></a></span></h3>
+                        <h3><a href="">${comment.author.login}</a><span><time></time></a></span></h3>
                         <p>${comment.text}</p>
                     </div>
                 </div>
@@ -160,5 +125,46 @@
     </div>
 </section>
 
+
 </body>
+<script type="text/javascript">
+    function send_comment() {
+     if (event.keyCode === 13) {
+         console.log(1);
+         $.ajax({
+             url: "/add/comment",
+             data: {"text": $("#snd_comm").val(), "post_id": "${post.id}"},
+             dataType: "json",
+             success: function (result) {
+                 $("#snd_comm").val("");
+                 var str = "<div class=\"comment\"><img src=\"https://goo.gl/oM0Y8G\" alt=\"\" />\n" +
+                         "                    <div class=\"content\">\n" +
+                         "                        <h3><a href=\"\">" + result.login + "</a><span><time></time></a></span></h3>\n" +
+                         "                        <p>" + result.text + "</p>\n" +
+                         "                    </div>\n" +
+                         "                </div>";
+
+                 $("#comment_container").prepend(str);
+             },
+             error: function (jqXHR, exception) {
+                 if (jqXHR.status === 0) {
+                     alert('Not connect.\n Verify Network.');
+                 } else if (jqXHR.status == 404) {
+                     alert('Requested page not found. [404]');
+                 } else if (jqXHR.status == 500) {
+                     alert('Internal Server Error [500].');
+                 } else if (exception === 'parsererror') {
+                     alert('Requested JSON parse failed.');
+                 } else if (exception === 'timeout') {
+                     alert('Time out error.');
+                 } else if (exception === 'abort') {
+                     alert('Ajax request aborted.');
+                 } else {
+                     alert('Uncaught Error.\n' + jqXHR.responseText);
+                 }
+             }
+         });
+     }
+    }
+</script>
 </html>
