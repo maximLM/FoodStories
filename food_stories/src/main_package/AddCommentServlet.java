@@ -43,6 +43,7 @@ public class AddCommentServlet extends HttpServlet {
             assert comment != null;
             jsonObject.put("login", comment.getAuthor().getLogin());
             jsonObject.put("text", comment.getText());
+            jsonObject.put("photo", comment.getAuthor().getPhoto());
         } catch (JSONException e) {
             e.printStackTrace();
         }

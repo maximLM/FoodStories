@@ -11,6 +11,7 @@ public class User {
     private Calendar register;
     private String city;
     private String password;
+    private String photo;
     private boolean admin;
 
     public User(int id,
@@ -21,7 +22,8 @@ public class User {
                 Calendar birthday,
                 String city,
                 Calendar register,
-                boolean admin) {
+                boolean admin,
+                String photo) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -31,6 +33,7 @@ public class User {
         this.register = register;
         this.city = city;
         this.admin = admin;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -104,5 +107,9 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getPhoto() {
+        return photo;
     }
 }

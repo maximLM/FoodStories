@@ -3,6 +3,7 @@ package dao;
 import com.sun.org.apache.regexp.internal.RE;
 import entities.Post;
 import entities.User;
+import main_package.Helper;
 
 import java.sql.*;
 import java.util.Calendar;
@@ -44,7 +45,8 @@ public class UserDao {
                     toCalendar(rs.getDate(++ind)),
                     rs.getString(++ind),
                     toCalendar(rs.getDate(++ind)),
-                    false
+                    false,
+                    rs.getString(++ind)
             );
             ind = 0;
             if (getAdminId() == user.getId()) user.setAdmin(true);
@@ -68,8 +70,8 @@ public class UserDao {
         try {
             java.sql.Date dateB = toDate(birthday);
             java.sql.Date dateR = toDate(registred);
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO \"user\" (login, password, name, email, birthday, city, registred) " +
-                    "VALUES(?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO \"user\" (login, password, name, email, birthday, city, registred, photo) " +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, login);
             ps.setString(2, password);
             ps.setString(3, name);
@@ -77,6 +79,7 @@ public class UserDao {
             ps.setDate(5, dateB);
             ps.setString(6, city);
             ps.setDate(7, dateR);
+            ps.setString(8, "/img/petyr_baelish.jpg");
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -119,7 +122,8 @@ public class UserDao {
                     toCalendar(rs.getDate(++ind)),
                     rs.getString(++ind),
                     toCalendar(rs.getDate(++ind)),
-                    false
+                    false,
+                    rs.getString(++ind)
             );
             ind = 0;
             if (getAdminId() == user.getId()) user.setAdmin(true);
@@ -153,7 +157,7 @@ public class UserDao {
             ps.setString(++ind, user.getName());
             ps.setString(++ind, user.getEmail());
             ps.setDate(++ind, toDate(user.getBirthday()));
-            ps.setString(++ind, user.getCity());
+            ps.setString(++ind , user.getCity());
             ps.setDate(++ind, toDate(user.getRegister()));
             ps.setInt(++ind, user.getId());
             ind = 0;

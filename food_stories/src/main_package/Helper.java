@@ -11,6 +11,7 @@ import java.util.Date;
 
 public class Helper {
 
+    public static final String ROOT_OF_PROJECT = "W:/WEBM_PROJECTS/FoodStoriesProject/food_stories";
     public static final String CURRENT_USER_KEY = "current_user";
 
     public static Calendar toCalendar(Date date){

@@ -39,7 +39,8 @@ public class ProfileServlet extends HttpServlet {
                 user.getBirthday(),
                 city,
                 user.getRegister(),
-                user.isAdmin()
+                user.isAdmin(),
+                user.getPhoto()
         );
         UserDao.updateUser(user);
         req.getSession().setAttribute(CURRENT_USER_KEY, user);

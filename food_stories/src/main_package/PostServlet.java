@@ -2,6 +2,7 @@ package main_package;
 
 import entities.Comment;
 import entities.Post;
+import entities.User;
 import freemarker.template.TemplateException;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import static main_package.Helper.CURRENT_USER_KEY;
 
 @WebServlet("/post")
 public class PostServlet extends HttpServlet {
@@ -31,7 +34,7 @@ public class PostServlet extends HttpServlet {
         }
         HashMap<String, Object> front = new HashMap<>();
         front.put("post", post);
-
+        front.put("user", ((User)req.getSession().getAttribute(CURRENT_USER_KEY)));
         System.out.println("POST = " + post);
         try {
             Render.render(resp, front, "/post.ftl");

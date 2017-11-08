@@ -20,7 +20,7 @@
 
         <div class="box image">
             <div class="box-header">
-                <h3><a href=""><img src="https://goo.gl/oOD0V2" alt="" />${post.author.login}</a>
+                <h3><a href=""><img src="${post.author.photo}" alt="" />${post.author.login}</a>
                     <span>TODO<i class="fa fa-globe"></i></span>
                 </h3>
                 <span><i class="fa fa-angle-down"></i></span>
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div class="box-new-comment">
-                <img src="https://goo.gl/oOD0V2" alt="" />
+                <img src="${user.photo}" alt="" />
                 <div class="content">
                     <div class="row">
                         <textarea placeholder="комментарий" onkeydown="send_comment()" id="snd_comm"></textarea>
@@ -112,7 +112,7 @@
             <div class="box-comments" id="comment_container">
                 <#list post.comments as comment>
 
-                <div class="comment"><img src="https://goo.gl/oM0Y8G" alt="" />
+                <div class="comment"><img src="${comment.author.photo}" alt="" />
                     <div class="content">
                         <h3><a href="">${comment.author.login}</a><span><time></time></a></span></h3>
                         <p>${comment.text}</p>
@@ -136,8 +136,9 @@
              data: {"text": $("#snd_comm").val(), "post_id": "${post.id}"},
              dataType: "json",
              success: function (result) {
-                 $("#snd_comm").val("");
-                 var str = "<div class=\"comment\"><img src=\"https://goo.gl/oM0Y8G\" alt=\"\" />\n" +
+                 $("#snd_comm").val("" +
+                         "");
+                 var str = "<div class=\"comment\"><img src=\"" + result.photo + "\" alt=\"\" />\n" +
                          "                    <div class=\"content\">\n" +
                          "                        <h3><a href=\"\">" + result.login + "</a><span><time></time></a></span></h3>\n" +
                          "                        <p>" + result.text + "</p>\n" +

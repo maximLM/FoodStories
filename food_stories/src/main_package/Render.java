@@ -17,7 +17,7 @@ public class Render {
     private static Configuration getCfg() throws IOException {
         if (cfg == null) {
             cfg = new Configuration();
-            cfg.setDirectoryForTemplateLoading(new File("W:/WEBM_PROJECTS/FoodStoriesProject/food_stories/web/templates"));
+            cfg.setDirectoryForTemplateLoading(new File(Helper.ROOT_OF_PROJECT + "/web/templates"));
             cfg.setDefaultEncoding("UTF-8");
         }
         return cfg;
