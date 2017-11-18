@@ -5,17 +5,20 @@ import entities.User;
 import freemarker.template.TemplateException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import javax.servlet.http.Part;
+import java.io.*;
 import java.util.Calendar;
 import java.util.HashMap;
 
 import static main_package.Helper.CURRENT_USER_KEY;
 
 @WebServlet("/profile")
+@MultipartConfig
 public class ProfileServlet extends HttpServlet {
 
     @Override
@@ -26,9 +29,45 @@ public class ProfileServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String city = req.getParameter("city");
+        if (login == null ||
+                name == null ||
+                email == null ||
+                password == null ||
+                city == null ) {
+            System.out.println("city = " + city);
+            System.out.println("password = " + password);
+            System.out.println("login = " + login);
+            System.out.println("email = " + email);
+            System.out.println("name = " + name);
+            resp.sendRedirect("/index.jsp");
+            return;
+        }
         if (!login.equals(user.getLogin()) && UserDao.existsWithLogin(login)) {
             resp.sendRedirect("/profile");
             return;
+        }
+        Part part = req.getPart("photo");
+        String filePath = Helper.ROOT_OF_SERVER + "/pics/" + user.getId() + "DIVIDER_" +
+                System.currentTimeMillis() + ".jpg";
+        OutputStream out = null;
+        InputStream in = null;
+        try {
+            out = new FileOutputStream(new File(filePath));
+            in = part.getInputStream();
+            final byte[] bytes = new byte[1024];
+            int read;
+            while ((read = in.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (out != null) {
+                out.close();
+            }
+            if (in != null) {
+                in.close();
+            }
         }
         user = new User(
                 user.getId(),
@@ -40,7 +79,7 @@ public class ProfileServlet extends HttpServlet {
                 city,
                 user.getRegister(),
                 user.isAdmin(),
-                user.getPhoto()
+                filePath
         );
         UserDao.updateUser(user);
         req.getSession().setAttribute(CURRENT_USER_KEY, user);

@@ -6,7 +6,7 @@
     <script src="js/jquery-3.2.1.min.js"></script>
     <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
     <script src="js/bootstrap.js"></script>
-    <link rel="stylesheet" href="css/styles.css" media="screen" type="text/css" />
+
     <link href="css/facebook.css" type="text/css" rel="stylesheet">
     <link href="css/post.css" type="text/css" rel="stylesheet">
 
@@ -21,9 +21,9 @@
         <div class="box image">
             <div class="box-header">
                 <h3><a href=""><img src="${post.author.photo}" alt="" />${post.author.login}</a>
-                    <span>TODO<i class="fa fa-globe"></i></span>
+                    <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
                 </h3>
-                <span><i class="fa fa-angle-down"></i></span>
+                <span><i class="glyphicon glyphicon-edit"></i></span>
                 <div class="window"><span></span></div>
             </div>
             <div class="box-content">
@@ -78,7 +78,6 @@
                 </div>
                 <div class="bottom">
                     <p>${post.text}</p>
-                    <span><span class="fa fa-search-plus"></span></span>
                 </div>
                 <div class = "container" style="width:100%;height:50px;float:left;overflow-x:scroll;white-space:nowrap; text-align: center">
                 <#list post.tags as tag>
@@ -92,7 +91,7 @@
 
             <div class="box-buttons">
                 <div class="row">
-                    <button><span class="glyphicon glyphicon-heart"> </span> ${post.likes}</button>
+                    <button onclick="inc_likes(this.id)" id="likes_button"><span class="glyphicon glyphicon-heart"> </span> ${post.likes}</button>
                     <button>${post.comments?size} <span class="glyphicon glyphicon-comment"></span></button>
                 </div>
             </div>
@@ -100,7 +99,7 @@
                 <img src="${user.photo}" alt="" />
                 <div class="content">
                     <div class="row">
-                        <textarea placeholder="комментарий" onkeydown="send_comment()" id="snd_comm"></textarea>
+                        <textarea placeholder="комментарий" id="snd_comm" onkeydown="send_comment()"></textarea>
                     </div>
                     <div class="row">
                         <span class="fa fa-smile-o"></span>
@@ -109,8 +108,8 @@
             </div>
 
 
-            <div class="box-comments" id="comment_container">
-                <#list post.comments as comment>
+            <div class="box-comments">
+            <#list post.comments as comment>
 
                 <div class="comment"><img src="${comment.author.photo}" alt="" />
                     <div class="content">
@@ -118,54 +117,86 @@
                         <p>${comment.text}</p>
                     </div>
                 </div>
-                </#list>
+            </#list>
             </div>
 
         </div>
     </div>
 </section>
-
-
 </body>
 <script type="text/javascript">
-    function send_comment() {
-     if (event.keyCode === 13) {
-         console.log(1);
-         $.ajax({
-             url: "/add/comment",
-             data: {"text": $("#snd_comm").val(), "post_id": "${post.id}"},
-             dataType: "json",
-             success: function (result) {
-                 $("#snd_comm").val("" +
-                         "");
-                 var str = "<div class=\"comment\"><img src=\"" + result.photo + "\" alt=\"\" />\n" +
-                         "                    <div class=\"content\">\n" +
-                         "                        <h3><a href=\"\">" + result.login + "</a><span><time></time></a></span></h3>\n" +
-                         "                        <p>" + result.text + "</p>\n" +
-                         "                    </div>\n" +
-                         "                </div>";
+    function inc_likes(button_idk){
+        console.log(1);
+        $.ajax({
+            url: "/incrementlikes",
+            data: {"likes": "${post.likes}", "id": "${post.id}"},
+            dataType: "json",
+            success: function (result) {
 
-                 $("#comment_container").prepend(str);
-             },
-             error: function (jqXHR, exception) {
-                 if (jqXHR.status === 0) {
-                     alert('Not connect.\n Verify Network.');
-                 } else if (jqXHR.status == 404) {
-                     alert('Requested page not found. [404]');
-                 } else if (jqXHR.status == 500) {
-                     alert('Internal Server Error [500].');
-                 } else if (exception === 'parsererror') {
-                     alert('Requested JSON parse failed.');
-                 } else if (exception === 'timeout') {
-                     alert('Time out error.');
-                 } else if (exception === 'abort') {
-                     alert('Ajax request aborted.');
-                 } else {
-                     alert('Uncaught Error.\n' + jqXHR.responseText);
-                 }
-             }
-         });
-     }
+                var el = document.getElementById(button_idk);
+                el.firstChild.data = "kek";
+            },
+            error: function (jqXHR, exception) {
+                if (jqXHR.status === 0) {
+                    alert('Not connect.\n Verify Network.');
+                } else if (jqXHR.status == 404) {
+                    alert('Requested page not found. [404]');
+                } else if (jqXHR.status == 500) {
+                    alert('Internal Server Error [500].');
+                } else if (exception === 'parsererror') {
+                    alert('Requested JSON parse failed.');
+                } else if (exception === 'timeout') {
+                    alert('Time out error.');
+                } else if (exception === 'abort') {
+                    alert('Ajax request aborted.');
+                } else {
+                    alert('Uncaught Error.\n' + jqXHR.responseText);
+                }
+
+            }
+        });
+    }
+
+</script>
+<script type="text/javascript">
+    function send_comment() {
+        if (event.keyCode === 13) {
+            console.log(1);
+            $.ajax({
+                url: "/add/comment",
+                data: {"text": $("#snd_comm").val(), "post_id": "${post.id}"},
+                dataType: "json",
+                success: function (result) {
+                    $("#snd_comm").val("" +
+                            "");
+                    var str = "<div class=\"comment\"><img src=\"" + result.photo + "\" alt=\"\" />\n" +
+                            "                    <div class=\"content\">\n" +
+                            "                        <h3><a href=\"\">" + result.login + "</a><span><time></time></a></span></h3>\n" +
+                            "                        <p>" + result.text + "</p>\n" +
+                            "                    </div>\n" +
+                            "                </div>";
+
+                    $("#comment_container").prepend(str);
+                },
+                error: function (jqXHR, exception) {
+                    if (jqXHR.status === 0) {
+                        alert('Not connect.\n Verify Network.');
+                    } else if (jqXHR.status == 404) {
+                        alert('Requested page not found. [404]');
+                    } else if (jqXHR.status == 500) {
+                        alert('Internal Server Error [500].');
+                    } else if (exception === 'parsererror') {
+                        alert('Requested JSON parse failed.');
+                    } else if (exception === 'timeout') {
+                        alert('Time out error.');
+                    } else if (exception === 'abort') {
+                        alert('Ajax request aborted.');
+                    } else {
+                        alert('Uncaught Error.\n' + jqXHR.responseText);
+                    }
+                }
+            });
+        }
     }
 </script>
 </html>

@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         req.getSession().setAttribute("current_user", user);
-        resp.sendRedirect("/profile");
+        resp.sendRedirect("/search");
     }
 
     @Override

@@ -61,9 +61,8 @@
 </nav>
 
 <div class="container" >
-    <div  align="center"> <img alt="User Pic" src="${user.photo}" id="profile-image1" class="img-circle img-responsive">
+    <div  align="center"> <img alt="User Pic" src="/kek.jpg"" id="profile-image1" class="img-circle img-responsive">
 
-        <input id="profile-image-upload" class="hidden" type="file">
         <div style="color:#999;" >Изменить аватар</div>
         <!--Upload Image Js And Css-->
 
@@ -74,11 +73,14 @@
 
 
     </div>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     <div class="input-group">
         <span class="input-group-addon">Имя</span>
         <input id="name" type="text" class="form-control" name="name" value="${user.name}">
     </div>
+
+    <input id="profile-image-upload" class="hidden" type="file" name="photo">
+
     <div class="input-group">
         <span class="input-group-addon">Логин</span>
         <input id="login" type="text" class="form-control" name="login" value="${user.login}">

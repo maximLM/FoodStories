@@ -6,11 +6,9 @@ import entities.Post;
 import entities.Tag;
 import entities.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static main_package.Helper.toCalendar;
@@ -93,5 +91,97 @@ public class PostDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static List<Post> search(String pattern) {
+        Connection conn = DBConnection.getConnection();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(
+                    "SELECT *\n" +
+                            "  FROM \"post\"  AS P1\n" +
+                            "WHERE P1._text LIKE '%" + pattern + "%';"
+            );
+            ArrayList<Post> ret = new ArrayList<>();
+            while (rs.next()) {
+                ret.add(new Post(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        toCalendar(rs.getDate(3)),
+                        rs.getInt(4)
+                ));
+            }
+            return ret;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static List<Post> search(String pattern, List<String> tags) {
+        StringBuilder sb = new StringBuilder(
+                "SELECT *\n" +
+                        "FROM \"post\"  AS P1\n" +
+                        "WHERE (\n" +
+                        "        SELECT COUNT(*) FROM\n" +
+                        "  (SELECT P2.id\n" +
+                        "   FROM \"tag\" AS P2\n");
+        if (!tags.isEmpty()) {
+            sb.append("WHERE P2.tag = '" + tags.get(0) + "' ");
+            for (int i = 1; i < tags.size(); ++i) {
+                String cur = tags.get(i);
+                sb.append("OR P2.tag = '" + cur + "' ");
+            }
+        }
+        sb.append("\n" +
+//
+                        "   EXCEPT\n" +
+                        "   SELECT P3.tag_id\n" +
+                        "   FROM \"post_tags\" AS P3\n" +
+                        "   WHERE P3.post_id = P1.id) AS KEK)\n" +
+                        "  = 0\n" +
+                        "  AND\n" +
+                        "  P1._text LIKE '%" + pattern + "%'");
+        String query = sb.toString();
+        System.out.println("query = " + query);
+        Connection conn = DBConnection.getConnection();
+        Statement statement = null;
+        try {
+            statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            ArrayList<Post> ret = new ArrayList<>();
+
+            while (rs.next()) {
+                ret.add(new Post(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        toCalendar(rs.getDate(3)),
+                        rs.getInt(4)
+                ));
+            }
+            return ret;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static void incrementLikes(int id, int likes) {
+        ++likes;
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement(
+                    "UPDATE \"post\" SET likes = ?" +
+                            "WHERE id = ?"
+            );
+            ps.setInt(1, likes);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

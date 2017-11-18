@@ -147,7 +147,8 @@ public class UserDao {
                             "  email = ?,\n" +
                             "  birthday = ?,\n" +
                             "  city = ?,\n" +
-                            "  registred = ?\n" +
+                            "  registred = ?\n," +
+                            "  photo = ?\n" +
                             "  WHERE id = ?"
             );
             int ind = 0;
@@ -159,6 +160,7 @@ public class UserDao {
             ps.setDate(++ind, toDate(user.getBirthday()));
             ps.setString(++ind , user.getCity());
             ps.setDate(++ind, toDate(user.getRegister()));
+            ps.setString(++ind, user.getPhoto());
             ps.setInt(++ind, user.getId());
             ind = 0;
             ps.executeUpdate();

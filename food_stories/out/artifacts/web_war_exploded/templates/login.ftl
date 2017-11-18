@@ -18,7 +18,7 @@
 <section class="login-form-wrap">
 
     <h1>FoodStories</h1>
-    <form class="login-form" action="#" method="POST">
+    <form class="login-form" action="#" method = "POST">
         <label>
             <input type="text" name="login" required placeholder="Логин">
         </label>
@@ -36,7 +36,7 @@
 </div>
     <div class="container reg hidden">
         <section class="login-form-wrap">
-    <form class="login-form" action="#" method="POST">
+    <form class="login-form" action="#">
         <label>
             <input type="text" name="login" required placeholder="Логин">
         </label>

@@ -1,5 +1,5 @@
 @import url('//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
-*,*::before,*::after {
+.container > .box *,*::before,*::after {
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
@@ -10,13 +10,15 @@
 :-ms-input-placeholder {  color: #C6C9D0;}
 html, body {
     background: #E6E7EA;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Lato', sans-serif;
+    color:#555555;
     font-size: 16px;
     font-weight: 400;
     line-height: 28px;
     margin: 0;
     padding: 0;
 }
+
 a {
     color: #3B5998;
     text-decoration: none;
@@ -67,6 +69,8 @@ textarea {
     width: calc(100% - 20px) !important;
 }
 .container {
+    width: 80%;
+    height: 40%;
     margin: 0 auto;
     overflow: hidden;
     padding: 0;
@@ -222,6 +226,7 @@ textarea {
     -moz-transition: all .25s ease-in-out;
     transition: all .25s ease-in-out;
 }
+
 .container > .box > .box-content > .bottom > span > span:hover {
     opacity: 1;
 }
@@ -521,7 +526,24 @@ textarea {
     *zoom:1;/* For IE7*/
     white-space:normal;
     padding: 5px;
+    vertical-align: middle;
 }
 .tag-container{
 
+}
+.carousel {
+    height: 400px !important;
+    overflow: hidden;
+}
+.carousel-inner {
+    overflow: visible;
+}
+.carousel-inner img {
+    left: 50%;
+    max-width: none !important;
+    min-height: 400px;
+    min-width: 100%;
+    position: absolute;
+    top: 200px;
+    transform: translate(-50%,-50%);
 }

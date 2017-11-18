@@ -7,8 +7,7 @@
     <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
     <script src="js/bootstrap.js"></script>
     <link rel="stylesheet" href="css/styles.css" media="screen" type="text/css" />
-    <link href="css/facebook.css" type="text/css" rel="stylesheet">
-
+    <link rel="stylesheet" href="css/navigation.css" media="screen" type="text/css" />
     <link href="js/jquery-ui-1.12.1/jquery-ui.css" type="text/css" rel="stylesheet">
     <script src="js/jquery-ui-1.12.1/jquery-ui.js"></script>
 </head>
@@ -61,8 +60,9 @@
 </nav>
 
 <div class="container" >
-    <div  align="center"> <img alt="User Pic" src="/kek.jpg"" id="profile-image1" class="img-circle img-responsive">
+    <div  align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
 
+        <input id="profile-image-upload" class="hidden" type="file">
         <div style="color:#999;" >Изменить аватар</div>
         <!--Upload Image Js And Css-->
 
@@ -73,21 +73,18 @@
 
 
     </div>
-<form method="POST" enctype="multipart/form-data">
+<form>
     <div class="input-group">
         <span class="input-group-addon">Имя</span>
-        <input id="name" type="text" class="form-control" name="name" value="${user.name}">
+        <input id="name" type="text" class="form-control" name="name">
     </div>
-
-    <input id="profile-image-upload" class="hidden" type="file" name="photo">
-
     <div class="input-group">
         <span class="input-group-addon">Логин</span>
-        <input id="login" type="text" class="form-control" name="login" value="${user.login}">
+        <input id="login" type="text" class="form-control" name="login" >
     </div>
     <div class="input-group">
         <span class="input-group-addon">Email</span>
-        <input id="email" type="email" class="form-control" name="email" value="${user.email}">
+        <input id="email" type="email" class="form-control" name="email">
     </div>
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -95,11 +92,11 @@
     </div>
     <div class="input-group">
         <span class="input-group-addon">Город</span>
-        <input id="city" type="text" class="form-control" name="city" value="${user.city}">
+        <input id="city" type="text" class="form-control" name="city">
     </div>
     <div class="input-group">
         <span class="input-group-addon">Любимая еда</span>
-        <input id="food" type="text" class="form-control" name="food" value="TODO">
+        <input id="food" type="text" class="form-control" name="food">
     </div>
     <div align="center">
         <input type="submit"  value="Подтвердить">
