@@ -26,7 +26,7 @@ public class Post {
 
     @Override
     public String toString() {
-        return "id = " + id + "\ntext = " + text + "\nlikes = " + likes + "\n";
+        return "\nid = " + id + "\ntext = " + text + "\nlikes = " + likes + "\nauthor = " + author + "\n";
     }
 
     public int getId() {

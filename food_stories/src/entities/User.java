@@ -16,6 +16,21 @@ public class User {
 
     public User(int id,
                 String login,
+                String photo) {
+        this(id,
+                login,
+                "kek",
+                "kek",
+                "kek",
+                Calendar.getInstance(),
+                "kek",
+                Calendar.getInstance(),
+                false,
+                photo);
+    }
+
+    public User(int id,
+                String login,
                 String password,
                 String name,
                 String email,

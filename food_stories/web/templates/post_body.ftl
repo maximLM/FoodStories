@@ -1,20 +1,20 @@
-
+<#list posts as post>
                 <div class="box image">
                     <div class="box-header">
                         <h3><a href=""><img src="${post.author.photo}" alt="" />${post.author.login}</a>
                             <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
                         </h3>
-                        <span><i class="glyphicon glyphicon-edit"></i></span>
+                        <span><i class="glyphicon glyphicon-edit" onclick="location.href = '/post?id=${post.id}';"></i></span>
                         <div class="window"><span></span></div>
                     </div>
                     <div class="box-content">
                         <div class="container">
-                            <div id="myCarousel1" class="carousel slide" data-ride="carousel">
+                            <div id="myCarousel${post.id}" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
                                 <ol class="carousel-indicators">
-                                    <li data-target="#myCarousel1" data-slide-to="0" class="active"></li>
-                                    <li data-target="#myCarousel1" data-slide-to="1"></li>
-                                    <li data-target="#myCarousel1" data-slide-to="2"></li>
+                                    <li data-target="#myCarousel${post.id}" data-slide-to="0" class="active"></li>
+                                    <li data-target="#myCarousel${post.id}" data-slide-to="1"></li>
+                                    <li data-target="#myCarousel${post.id}" data-slide-to="2"></li>
                                 </ol>
 
                                 <!-- Wrapper for slides -->
@@ -47,11 +47,11 @@
                                 </div>
 
                                 <!-- Left and right controls -->
-                                <a class="left carousel-control" href="#myCarousel1" data-slide="prev">
+                                <a class="left carousel-control" href="#myCarousel${post.id}" data-slide="prev">
                                     <span class="glyphicon glyphicon-chevron-left"></span>
                                     <span class="sr-only">Previous</span>
                                 </a>
-                                <a class="right carousel-control" href="#myCarousel1" data-slide="next">
+                                <a class="right carousel-control" href="#myCarousel${post.id}" data-slide="next">
                                     <span class="glyphicon glyphicon-chevron-right"></span>
                                     <span class="sr-only">Next</span>
                                 </a>
@@ -66,7 +66,7 @@
 
                     <div class="box-buttons">
                         <div class="row">
-                            <button><span class="glyphicon glyphicon-heart"> </span> 99</button>
+                            <button><span class="glyphicon glyphicon-heart"> </span> ${post.likes}</button>
                             <button>145 <span class="glyphicon glyphicon-comment"></span></button>
                         </div>
                     </div>
@@ -74,3 +74,4 @@
 
                 </div>
 
+</#list>

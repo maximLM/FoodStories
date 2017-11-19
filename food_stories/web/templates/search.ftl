@@ -115,7 +115,8 @@
                 data: {"pattern": $("#pattern").val(), "tags": $("#tags").val()},
                 dataType: "json",
                 success: function (result) {
-                    $("#post_container").val(result.posts);
+                    $("#post_container").html("");
+                    $("#post_container").append(result.posts);
                 },
                 error: function (jqXHR, exception) {
                     alert("kekkke");

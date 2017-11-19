@@ -23,9 +23,62 @@
                 <h3><a href=""><img src="${post.author.photo}" alt="" />${post.author.login}</a>
                     <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
                 </h3>
-                <span><i class="glyphicon glyphicon-edit"></i></span>
+                <span><i class="glyphicon glyphicon-edit" id="edit-button"></i></span>
                 <div class="window"><span></span></div>
             </div>
+            <div class="box-content edit hidden" id="edit_container">
+                <form>
+
+                    <div class="form-group" >
+                        <div class="input-group input-file" name="Fichier1" >
+                            <span class="input-group-btn" style="box-sizing: border-box">
+                                <button class="btn btn-default btn-choose" type="button" >Choose</button>
+                            </span>
+                            <input type="text" class="form-control" placeholder='Choose a file...' style="box-sizing: border-box"/>
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-primary btn-submit" >Submit</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <ul class="list-inline" id = "photo_links">
+                            <li class="list-group-item list-group-item-info justify-content-between">
+                                <div class="checkbox">
+                                    <label><input type="checkbox"> photo1</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-info justify-content-between">
+                                <div class="checkbox">
+                                    <label><input type="checkbox"> photo1</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-info justify-content-between">
+                                <div class="checkbox">
+                                    <label><input type="checkbox"> photo1</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item list-group-item-info justify-content-between">
+                                <div class="checkbox">
+                                    <label><input type="checkbox"> photo1</label>
+                                </div>
+                            </li>
+
+
+                        </ul>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea class="form-control" rows="3" id="text" placeholder="Расскажи что-нибудь" ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="1" id="tags" placeholder="#tag1 #tag2"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-submit" >Изменить пост</button>
+
+                </form>
+            </div>
+
             <div class="box-content">
                 <div class="container">
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -108,7 +161,7 @@
             </div>
 
 
-            <div class="box-comments">
+            <div class="box-comments" id="comment_container">
             <#list post.comments as comment>
 
                 <div class="comment"><img src="${comment.author.photo}" alt="" />
@@ -198,5 +251,35 @@
             });
         }
     }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#edit-button").on("click", function () {
+            <!-- $(".box-content").replaceWith($(".edit")); !-->
+            if( $(".edit").hasClass("hidden")){
+                $(".box-content").slideUp(function () {
+                    $(".edit").removeClass("hidden").slideDown();
+                    $(".box-buttons").addClass("hidden");
+                    $(".box-new-comment").addClass("hidden");
+                    $(".box-comments").addClass("hidden");
+
+                })
+            }
+            else{
+                $(".edit").slideUp(function () {
+                    $(".edit").addClass("hidden");
+                    $(".box-content").slideDown();
+
+                    $(".box-buttons").removeClass("hidden");
+                    $(".box-new-comment").removeClass("hidden");
+                    $(".box-comments").removeClass("hidden");
+                })
+            }
+
+            return false;
+
+        })
+    })
 </script>
 </html>

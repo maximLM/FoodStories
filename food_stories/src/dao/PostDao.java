@@ -8,6 +8,7 @@ import entities.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -93,59 +94,94 @@ public class PostDao {
         return null;
     }
 
-    public static List<Post> search(String pattern) {
-        Connection conn = DBConnection.getConnection();
-        try {
-            Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(
-                    "SELECT *\n" +
-                            "  FROM \"post\"  AS P1\n" +
-                            "WHERE P1._text LIKE '%" + pattern + "%';"
-            );
-            ArrayList<Post> ret = new ArrayList<>();
-            while (rs.next()) {
-                ret.add(new Post(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        toCalendar(rs.getDate(3)),
-                        rs.getInt(4)
-                ));
-            }
-            return ret;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     public static List<Post> search(String pattern, List<String> tags) {
-        StringBuilder sb = new StringBuilder(
-                "SELECT *\n" +
-                        "FROM \"post\"  AS P1\n" +
-                        "WHERE (\n" +
-                        "        SELECT COUNT(*) FROM\n" +
-                        "  (SELECT P2.id\n" +
-                        "   FROM \"tag\" AS P2\n");
+        String query = "SELECT P6.post_id, P6._text, P6._date, P6.likes, P6.user_id, P6.login, P6.photo FROM\n" +
+                "(\n" +
+                "  (\n" +
+                "    (\n" +
+                "      SELECT *\n" +
+                "          FROM \"post\"  AS P1\n" +
+                "          WHERE \n" +
+                "          P1._text LIKE '%" + pattern + "%'\n";
+
         if (!tags.isEmpty()) {
-            sb.append("WHERE P2.tag = '" + tags.get(0) + "' ");
+            query += "AND\n" +
+                    "          (\n" +
+                    "            SELECT COUNT(*) FROM\n" +
+                    "              (\n" +
+                    "                SELECT P2.id\n" +
+                    "                FROM \"tag\" AS P2\n" +
+                    "                WHERE P2.tag = '" + tags.get(0) + "' ";
             for (int i = 1; i < tags.size(); ++i) {
-                String cur = tags.get(i);
-                sb.append("OR P2.tag = '" + cur + "' ");
+                query += "OR P2.tag = '" + tags.get(i) + "' ";
             }
+            query += "\n" +
+                    "                EXCEPT\n" +
+                    "                SELECT P3.tag_id\n" +
+                    "                FROM \"post_tags\" AS P3\n" +
+                    "                WHERE P3.post_id = P1.id\n" +
+                    "              ) AS KEK\n" +
+                    "          ) = 0";
         }
-        sb.append("\n" +
-//
-                        "   EXCEPT\n" +
-                        "   SELECT P3.tag_id\n" +
-                        "   FROM \"post_tags\" AS P3\n" +
-                        "   WHERE P3.post_id = P1.id) AS KEK)\n" +
-                        "  = 0\n" +
-                        "  AND\n" +
-                        "  P1._text LIKE '%" + pattern + "%'");
-        String query = sb.toString();
+
+        query += ") AS P4\n" +
+                "\n" +
+                "    JOIN \"user_posts\" ON P4.id = \"user_posts\".post_id\n" +
+                "  ) AS P5\n" +
+                "  JOIN  \"user\" ON P5.user_id = \"user\".id\n" +
+                ") AS P6";
+
+        /*
+SELECT P6.post_id, P6._text, P6._date, P6.likes, P6.user_id, P6.login, P6.photo FROM
+(
+  (
+    (
+      SELECT *
+          FROM "post"  AS P1
+          WHERE
+          P1._text LIKE '%ate%'
+          AND
+          (
+            SELECT COUNT(*) FROM
+              (
+                SELECT P2.id
+                FROM "tag" AS P2
+                WHERE P2.tag = 'spahish' OR P2.tag = 'british'
+                EXCEPT
+                SELECT P3.tag_id
+                FROM "post_tags" AS P3
+                WHERE P3.post_id = P1.id
+              ) AS KEK
+          ) = 0
+
+    ) AS P4
+
+    JOIN "user_posts" ON P4.id = "user_posts".post_id
+  ) AS P5
+  JOIN  "user" ON P5.user_id = "user".id
+) AS P6
+
+
+SELECT P6.post_id, P6._text, P6._date, P6.likes, P6.user_id, P6.login, P6.photo FROM
+(
+  (
+    (
+      SELECT *
+          FROM "post"  AS P1
+          WHERE
+          P1._text LIKE '%ate%'
+    ) AS P4
+
+    JOIN "user_posts" ON P4.id = "user_posts".post_id
+  ) AS P5
+  JOIN  "user" ON P5.user_id = "user".id
+) AS P6
+         */
+
         System.out.println("query = " + query);
+        Statement statement;
         Connection conn = DBConnection.getConnection();
-        Statement statement = null;
         try {
             statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(query);
@@ -158,6 +194,13 @@ public class PostDao {
                         toCalendar(rs.getDate(3)),
                         rs.getInt(4)
                 ));
+                ret.get(ret.size() - 1).setAuthor(
+                        new User(
+                                rs.getInt(5),
+                                rs.getString(6),
+                                rs.getString(7)
+                        )
+                );
             }
             return ret;
         } catch (SQLException e) {

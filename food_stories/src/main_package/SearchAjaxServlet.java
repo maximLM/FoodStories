@@ -4,6 +4,7 @@ import dao.CommentDao;
 import dao.PostDao;
 import entities.Comment;
 import entities.Post;
+import entities.Tag;
 import entities.User;
 import freemarker.template.TemplateException;
 import org.json.JSONException;
@@ -15,9 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static main_package.Helper.CURRENT_USER_KEY;
 
@@ -28,27 +27,26 @@ public class SearchAjaxServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String pattern = req.getParameter("pattern");
         String tags = req.getParameter("tags");
-        System.out.println("pattern = " + pattern);
+        //System.out.println("pattern = " + pattern);
         String res = "";
+        List<String> tagList = new ArrayList<>();
+
         if (tags == null || tags.equals("")) {
             System.out.println("TAGS IS EMPTY");
-//            Post post = PostDao.search(pattern).get(0);
-            Post post = new Post(
-                    1,
-                    "text",
-                    Calendar.getInstance(),
-                    2
-            );
-            HashMap<String, Object> map = new HashMap<>();
-            map.put("post", post);
-            try {
-                res = Render.render(map, "post_body.ftl");
-            } catch (TemplateException e) {
-                e.printStackTrace();
-            }
 
         } else {
-
+            parseTags(tags, tagList);
+        }
+        System.out.println("TAGS : ");
+        for (String s : tagList) {
+            System.out.println(s);
+        }
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("posts", PostDao.search(pattern, tagList));
+        try {
+            res = Render.render(map, "post_body.ftl");
+        } catch (TemplateException e) {
+            e.printStackTrace();
         }
         JSONObject jsonObject = new JSONObject();
         try {
@@ -56,8 +54,14 @@ public class SearchAjaxServlet extends HttpServlet {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        System.out.println("res = " + res);
+        System.out.println("jsonObject = " + jsonObject);
         resp.setContentType("text/json");
         resp.getWriter().print(jsonObject.toString());
         resp.getWriter().close();
+    }
+
+    private void parseTags(String tags, List<String> tagList) {
+        tagList.addAll(Arrays.asList(tags.split(" *#")));
     }
 }
