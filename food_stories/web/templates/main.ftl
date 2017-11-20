@@ -180,8 +180,8 @@
         <div class="col-lg-2 col-lg-offset-10" style="position:fixed; width: 15%; margin-left:80% ">
             <div class="list-group">
             <#list pop_tags as pop_tag>
-            <#if pop_tag.tag == active_tag.tag>
-                <a href="/main?tag=${pop_tag.tag}" class="list-group-item-active">#${pop_tag.tag}</a>
+            <#if pop_tag.id == active_tag.id>
+                <a href="/main?tag=${pop_tag.tag}" class="list-group-item active">#${pop_tag.tag}</a>
             <#else>
                 <a href="/main?tag=${pop_tag.tag}" class="list-group-item">#${pop_tag.tag}</a>
             </#if>

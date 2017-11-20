@@ -9,6 +9,7 @@ import java.util.List;
 
 public class TagDao {
 
+
     public static List<Tag> getAllTags() {
         Connection conn = DBConnection.getConnection();
         try {
@@ -91,5 +92,22 @@ public class TagDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static List<Tag> getPopularTags() {
+        ArrayList<Tag> ret = new ArrayList<>();
+        Connection conn = DBConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT t.id, t.tag FROM \"tag\" AS t\n" +
+                            "ORDER BY (SELECT COUNT(*) FROM \"post_tags\" WHERE \"post_tags\".tag_id = t.id) DESC"
+            );
+            ResultSet rs = ps.executeQuery();
+            while (rs.next() && ret.size() < 8)
+                ret.add(new Tag(rs.getInt(1), rs.getString(2)));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ret;
     }
 }

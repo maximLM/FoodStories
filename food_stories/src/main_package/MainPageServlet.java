@@ -25,16 +25,13 @@ public class MainPageServlet extends HttpServlet {
         Tag active = new Tag(-1, "kejfasdasfdasdfadfasdfasdfasdfafasd");
         List<String> tagsSearch = new ArrayList<>();
         if (req.getParameterMap().containsKey("tag")) {
-            active = new Tag(-1, req.getParameter("tag"));
+            active = TagDao.getTagByName(req.getParameter("tag"));
             tagsSearch.add(active.getTag());
         }
         map.put("posts", PostDao.search("",tagsSearch));
         map.put("user", (User)req.getSession().getAttribute(Helper.CURRENT_USER_KEY));
-        map.put("active_tag", active.getTag());
-        List<Tag> tags = new ArrayList<>();
-        tags.add(new Tag(1, "spahish"));
-        tags.add(new Tag(2,"british"));
-        tags.add(new Tag(3,"tallian"));
+        map.put("active_tag", active);
+        List<Tag> tags = TagDao.getPopularTags();
         map.put("pop_tags", tags);
 
         try {
