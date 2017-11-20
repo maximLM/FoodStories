@@ -35,30 +35,32 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Главная</a></li>
-                <li><a href="#">Мои истории</a></li>
-                <li><a href="#">Описание</a></li>
-                <li><a href="#">Полезное</a></li>
+                <li class="active"><a href="/main">Главная</a></li>
+                <li><a href="/my_stories?id=${user.id}">Мои истории</a></li>
+                <li><a href="/about">Описание</a></li>
+                <li><a href="/useful">Полезное</a></li>
+                <li><a href="/create_post">Новый пост</a></li>
             </ul>
-            <form class="navbar-form navbar-left">
+            <form method="POST" class="navbar-form navbar-left">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Поиск">
                     <div class="input-group-btn">
+                        <a href="/search" id="kek">
                         <button class="btn btn-default" type="submit">
                             <i class="glyphicon glyphicon-search"></i>
                         </button>
+                        </a>
                     </div>
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#">
+                    <a href="/profile">
                         <span class=" glyphicon glyphicon-user" >
                         </span>
                     </a>
 
                 </li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-out" ></span>Выйти</a></li>
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-out" ></span>Выйти</a></li>
             </ul>
 
         </div>
@@ -104,7 +106,7 @@
             <#list posts as post>
             <div class="box image">
                 <div class="box-header">
-                    <h3><a href=""><img src="/load/${post.author.photo}" alt="" />${post.author.login}</a>
+                    <h3><a href="/my_stories?id=${post.author.id}"><img src="/load/${post.author.photo}" alt="" />${post.author.login}</a>
                         <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
                     </h3>
                     <span><i class="glyphicon glyphicon-edit" onclick="location.href = '/post?id=${post.id}';"></i></span>
@@ -194,4 +196,9 @@
 </body>
 
 </body>
+<script type="javascript">
+    function f() {
+        location.href = '/search';
+    }
+</script>
 </html>

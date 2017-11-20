@@ -58,8 +58,8 @@ public class SearchAjaxServlet extends HttpServlet {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        System.out.println("res = " + res);
-        System.out.println("jsonObject = " + jsonObject);
+//        System.out.println("res = " + res);
+//        System.out.println("jsonObject = " + jsonObject);
         resp.setContentType("text/json");
         resp.getWriter().print(jsonObject.toString());
         resp.getWriter().close();

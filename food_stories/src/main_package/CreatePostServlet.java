@@ -47,10 +47,12 @@ public class CreatePostServlet extends HttpServlet {
         UserDao.addPost(post.getAuthor(), post);
 
         Part part = req.getPart("photo");
-        String photo = author.getId() + "DIVIDER_" +
-                System.currentTimeMillis() + ".jpg";
-        Helper.loadPhoto(photo, part.getInputStream());
-        PostDao.addPhoto(post, photo);
+        if (part.getSize() != 0) {
+            String photo = author.getId() + "DIVIDER_" +
+                    System.currentTimeMillis() + ".jpg";
+            Helper.loadPhoto(photo, part.getInputStream());
+            PostDao.addPhoto(post, photo);
+        }
 //        FileItemFactory factory = new DiskFileItemFactory();
 //        ServletFileUpload upload = new ServletFileUpload(factory);
 //        String FieldName = "";

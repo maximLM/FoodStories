@@ -36,7 +36,14 @@ public class Helper {
     }
 
     public static void parseTags(String tags, List<String> tagList) {
-        tagList.addAll(Arrays.asList(tags.split(" *#")));
+
+        for (String tag : Arrays.asList(tags.split(" +"))){
+            for (String s : (Arrays.asList(tag.split("#+")))) {
+                if (!s.equals("") && !s.matches(" +"))
+                    tagList.add(s);
+
+            }
+        }
     }
     public static java.sql.Date toDate(Calendar calendar) {
         return new java.sql.Date(calendar.getTime().getTime());

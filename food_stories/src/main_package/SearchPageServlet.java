@@ -18,17 +18,10 @@ import java.util.List;
 public class SearchPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ArrayList<String> tags = new ArrayList<>();
-        tags.add("spahish");
-        tags.add("british");
-        String pattern = "ate";
-        List<Post> res =
-                PostDao.search(pattern, tags);
-        for (Post p : res) {
-            System.out.println("post = " + p);
-        }
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("user", req.getSession().getAttribute(Helper.CURRENT_USER_KEY));
         try {
-            Render.render(resp, new HashMap<>(), "search.ftl");
+            Render.render(resp, map, "search.ftl");
         } catch (TemplateException e) {
             e.printStackTrace();
         }

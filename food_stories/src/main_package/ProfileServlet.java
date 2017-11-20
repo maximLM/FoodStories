@@ -39,7 +39,7 @@ public class ProfileServlet extends HttpServlet {
             System.out.println("login = " + login);
             System.out.println("email = " + email);
             System.out.println("name = " + name);
-            resp.sendRedirect("/index.jsp");
+            resp.sendRedirect("/main");
             return;
         }
         if (!login.equals(user.getLogin()) && UserDao.existsWithLogin(login)) {

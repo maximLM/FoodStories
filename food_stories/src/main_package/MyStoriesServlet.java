@@ -22,6 +22,7 @@ public class MyStoriesServlet extends HttpServlet {
         HashMap<String, Object> map = new HashMap<>();
         User user = UserDao.getUserById(Integer.parseInt(req.getParameter("id")));
         map.put("user", user);
+        map.put("c_user", req.getSession().getAttribute(Helper.CURRENT_USER_KEY));
         List<Post> posts = PostDao.getUserPost(user);
         map.put("posts", posts);
         try {

@@ -20,6 +20,11 @@ import java.util.List;
 public class MainPageServlet extends HttpServlet {
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("/search");
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HashMap<String, Object> map = new HashMap<>();
         Tag active = new Tag(-1, "kejfasdasfdasdfadfasdfasdfasdfafasd");
