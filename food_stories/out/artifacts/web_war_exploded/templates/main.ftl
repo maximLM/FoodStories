@@ -73,30 +73,9 @@
 
         <div class="col-lg-2 col" style="position:fixed; width: 15% ">
             <div class="list-group">
-                <div class="thumbnail">
-                    <a href="#">
-                        <img src="static/photos/ny.jpg">
-                            <div class="caption">
-                                <p>Post text</p>
-                            </div>
-                    </a>
-                </div>
-                <div class="thumbnail">
-                    <a href="#">
-                        <img src="static/photos/ny.jpg">
-                        <div class="caption">
-                            <p>Post text</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="thumbnail">
-                    <a href="#">
-                        <img src="static/photos/ny.jpg">
-                        <div class="caption">
-                            <p>Post text</p>
-                        </div>
-                    </a>
-                </div>
+
+
+
             </div>
             </div>
         </div>
@@ -168,7 +147,6 @@
                     <div class="box-buttons">
                         <div class="row">
                             <button><span class="glyphicon glyphicon-heart"> </span> ${post.likes}</button>
-                            <button>145 <span class="glyphicon glyphicon-comment"></span></button>
                         </div>
                     </div>
 

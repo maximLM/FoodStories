@@ -23,7 +23,7 @@
                 <h3><a href=""><img src="/load/${post.author.photo}" alt=""/>${post.author.login}</a>
                     <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
                 </h3>
-                <span><i class="glyphicon glyphicon-edit" id="edit-button"></i></span>
+                <#--<span><i class="glyphicon glyphicon-edit" id="edit-button"></i></span>-->
                 <div class="window"><span></span></div>
             </div>
             <div class="box-content edit hidden" id="edit_container">

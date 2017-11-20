@@ -63,7 +63,6 @@
                     <div class="box-buttons">
                         <div class="row">
                             <button><span class="glyphicon glyphicon-heart"> </span> ${post.likes}</button>
-                            <button>145 <span class="glyphicon glyphicon-comment"></span></button>
                         </div>
                     </div>
 
