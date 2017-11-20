@@ -20,62 +20,64 @@
 
         <div class="box image">
             <div class="box-header">
-                <h3><a href=""><img src="/load/${post.author.photo}" alt=""/>${post.author.login}</a>
+                <h3><a href=""><img src="/load/${post.author.photo}" alt="" />${post.author.login}</a>
                     <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
                 </h3>
                 <span><i class="glyphicon glyphicon-edit" id="edit-button"></i></span>
                 <div class="window"><span></span></div>
             </div>
             <div class="box-content edit hidden" id="edit_container">
-                <form>
 
-                    <div class="form-group">
-                        <div class="input-group input-file" name="Fichier1">
+                    <div class="form-group" >
+                        <div class="input-group input-file" name="Fichier1" >
                             <span class="input-group-btn" style="box-sizing: border-box">
-                                <button class="btn btn-default btn-choose" type="button">Choose</button>
+                                <button class="btn btn-default btn-choose" type="button" >Choose</button>
                             </span>
-                            <input type="text" class="form-control" placeholder='Choose a file...'
-                                   style="box-sizing: border-box"/>
+                            <input type="text" class="form-control" placeholder='Choose a file...' style="box-sizing: border-box"/>
                             <span class="input-group-btn">
-                                <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+                                <button type="submit" class="btn btn-primary btn-submit" >Submit</button>
                             </span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <ul class="list-inline" id="photo_links">
-                            <li class="list-group-item list-group-item-info justify-content-between">
-                                <div class="checkbox">
-                                    <label><input type="checkbox"> photo1</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item list-group-item-info justify-content-between">
-                                <div class="checkbox">
-                                    <label><input type="checkbox"> photo1</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item list-group-item-info justify-content-between">
-                                <div class="checkbox">
-                                    <label><input type="checkbox"> photo1</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item list-group-item-info justify-content-between">
-                                <div class="checkbox">
-                                    <label><input type="checkbox"> photo1</label>
-                                </div>
-                            </li>
+                <form method="POST" enctype="multipart/form-data">
+                    <#--<div class="form-group">-->
+                        <#--<ul class="list-inline" id = "photo_links">-->
+                            <#--<li class="list-group-item list-group-item-info justify-content-between">-->
+                                <#--<div class="checkbox">-->
+                                    <#--<label><input type="checkbox"> photo1</label>-->
+                                <#--</div>-->
+                            <#--</li>-->
+                            <#--<li class="list-group-item list-group-item-info justify-content-between">-->
+                                <#--<div class="checkbox">-->
+                                    <#--<label><input type="checkbox"> photo1</label>-->
+                                <#--</div>-->
+                            <#--</li>-->
+                            <#--<li class="list-group-item list-group-item-info justify-content-between">-->
+                                <#--<div class="checkbox">-->
+                                    <#--<label><input type="checkbox"> photo1</label>-->
+                                <#--</div>-->
+                            <#--</li>-->
+                            <#--<li class="list-group-item list-group-item-info justify-content-between">-->
+                                <#--<div class="checkbox">-->
+                                    <#--<label><input type="checkbox"> photo1</label>-->
+                                <#--</div>-->
+                            <#--</li>-->
 
 
-                        </ul>
-                    </div>
+                        <#--</ul>-->
+                    <#--</div>-->
+                    <input id="image" type="file" class="form-control" name="photo" multiple/>
 
-                    <div class="form-group">
-                        <textarea class="form-control" rows="3" id="text" placeholder="Расскажи что-нибудь"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" rows="1" id="tags" placeholder="#tag1 #tag2"></textarea>
-                    </div>
+                    <#--</form>-->
+                <#--<form method="POST">-->
+                    <#--<div class="form-group">-->
+                        <input type="text" id="kek1" class="form-control" rows="3" name="text" placeholder="TE">
+                    <#--</div>-->
+                    <#--<div class="form-group">-->
+                        <input type="text" id="k2k" class="form-control" rows="1" name="tags" placeholder="#tag1 #tag2">
+                    <#--</div>-->
 
-                    <button type="submit" class="btn btn-primary btn-submit">Изменить пост</button>
+                    <input type="submit" class="btn btn-primary btn-submit" >
 
                 </form>
             </div>
@@ -92,23 +94,30 @@
 
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
-                        <#assign flag = 0>
-                        <#list post.photos as photo>
 
-                            <#if flag == 0>
                             <div class="item active">
-                            <#else>
-                            <div class="item">
-                            </#if>
-                            <#assign flag = 1>
-                            <img src="/load/${photo}" alt="Los Angeles" style="width:100%;">
-                            <div class="carousel-caption">
-                                <h3>Meat</h3>
-                                <p>Pork is always so much fun!</p>
+                                <img src="static/photos/meat.jpg" alt="Los Angeles" style="width:100%;">
+                                <div class="carousel-caption">
+                                    <h3>Meat</h3>
+                                    <p>Pork is always so much fun!</p>
+                                </div>
                             </div>
-                        </div>
-                        </#list>
 
+                            <div class="item">
+                                <img src="static/photos/chicago.jpg" alt="Chicago" style="width:100%;">
+                                <div class="carousel-caption">
+                                    <h3>Chicago</h3>
+                                    <p>Thank you, Chicago!</p>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <img src="static/photos/ny.jpg" alt="New York" style="width:100%;">
+                                <div class="carousel-caption">
+                                    <h3>New York</h3>
+                                    <p>We love the Big Apple!</p>
+                                </div>
+                            </div>
 
                         </div>
 
@@ -126,10 +135,9 @@
                 <div class="bottom">
                     <p>${post.text}</p>
                 </div>
-                <div class="container"
-                     style="width:100%;height:50px;float:left;overflow-x:scroll;white-space:nowrap; text-align: center">
+                <div class = "container" style="width:100%;height:50px;float:left;overflow-x:scroll;white-space:nowrap; text-align: center">
                 <#list post.tags as tag>
-                    <div class="tag">
+                    <div class = "tag">
                         <a href="#">${tag.tag}</a>
                     </div>
                 </#list>
@@ -139,13 +147,12 @@
 
             <div class="box-buttons">
                 <div class="row">
-                    <button onclick="inc_likes(this.id)" id="likes_button"><span
-                            class="glyphicon glyphicon-heart"> </span> ${post.likes}</button>
+                    <button onclick="inc_likes(this.id)" id="likes_button"><span class="glyphicon glyphicon-heart"> </span> ${post.likes}</button>
                     <button>${post.comments?size} <span class="glyphicon glyphicon-comment"></span></button>
                 </div>
             </div>
             <div class="box-new-comment">
-                <img src="/load/${user.photo}" alt=""/>
+                <img src="/load/${user.photo}" alt="" />
                 <div class="content">
                     <div class="row">
                         <textarea placeholder="комментарий" id="snd_comm" onkeydown="send_comment()"></textarea>
@@ -160,10 +167,9 @@
             <div class="box-comments" id="comment_container">
             <#list post.comments as comment>
 
-                <div class="comment"><img src="/load/${comment.author.photo}" alt=""/>
+                <div class="comment"><img src="/load/${comment.author.photo}" alt="" />
                     <div class="content">
-                        <h3><a href="">${comment.author.login}</a><span><time></time>
-                            </a></span></h3>
+                        <h3><a href="">${comment.author.login}</a><span><time></time></a></span></h3>
                         <p>${comment.text}</p>
                     </div>
                 </div>
@@ -175,7 +181,7 @@
 </section>
 </body>
 <script type="text/javascript">
-    function inc_likes(button_idk) {
+    function inc_likes(button_idk){
         console.log(1);
         $.ajax({
             url: "/incrementlikes",
@@ -251,10 +257,9 @@
 </script>
 
 <script>
-    $(document).ready(function () {
-        $("#edit-button").on("click", function () {
+    window.onload = function () {
             <!-- $(".box-content").replaceWith($(".edit")); !-->
-            if ($(".edit").hasClass("hidden")) {
+            if( $(".edit").hasClass("hidden")){
                 $(".box-content").slideUp(function () {
                     $(".edit").removeClass("hidden").slideDown();
                     $(".box-buttons").addClass("hidden");
@@ -263,7 +268,7 @@
 
                 })
             }
-            else {
+            else{
                 $(".edit").slideUp(function () {
                     $(".edit").addClass("hidden");
                     $(".box-content").slideDown();
@@ -276,7 +281,6 @@
 
             return false;
 
-        })
-    })
+    }
 </script>
 </html>

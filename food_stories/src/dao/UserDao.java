@@ -68,8 +68,8 @@ public class UserDao {
                                   Calendar registred) {
         Connection conn = DBConnection.getConnection();
         try {
-            java.sql.Date dateB = toDate(birthday);
-            java.sql.Date dateR = toDate(registred);
+            java.sql.Date dateB = Helper.toDate(birthday);
+            java.sql.Date dateR = Helper.toDate(registred);
             PreparedStatement ps = conn.prepareStatement("INSERT INTO \"user\" (login, password, name, email, birthday, city, registred, photo) " +
                     "VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, login);
@@ -79,7 +79,7 @@ public class UserDao {
             ps.setDate(5, dateB);
             ps.setString(6, city);
             ps.setDate(7, dateR);
-            ps.setString(8, "/img/petyr_baelish.jpg");
+            ps.setString(8, "kek.jpg");
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,9 +87,6 @@ public class UserDao {
         return getUserByLoginAndPass(login, password);
     }
 
-    public static java.sql.Date toDate(Calendar calendar) {
-        return new java.sql.Date(calendar.getTime().getTime());
-    }
 
     private static int getAdminId() {
         int id = -1;
@@ -157,9 +154,9 @@ public class UserDao {
             ps.setString(++ind, user.getPassword());
             ps.setString(++ind, user.getName());
             ps.setString(++ind, user.getEmail());
-            ps.setDate(++ind, toDate(user.getBirthday()));
-            ps.setString(++ind , user.getCity());
-            ps.setDate(++ind, toDate(user.getRegister()));
+            ps.setDate(++ind, Helper.toDate(user.getBirthday()));
+            ps.setString(++ind, user.getCity());
+            ps.setDate(++ind, Helper.toDate(user.getRegister()));
             ps.setString(++ind, user.getPhoto());
             ps.setInt(++ind, user.getId());
             ind = 0;
@@ -185,5 +182,20 @@ public class UserDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static void addPost(User author, Post post) {
+        Connection conn = DBConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "INSERT INTO \"user_posts\" (user_id, post_id) \n" +
+                            "VALUES(?, ?)"
+            );
+            ps.setInt(1, author.getId());
+            ps.setInt(2, post.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

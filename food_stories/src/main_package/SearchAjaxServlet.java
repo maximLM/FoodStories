@@ -35,14 +35,18 @@ public class SearchAjaxServlet extends HttpServlet {
             System.out.println("TAGS IS EMPTY");
 
         } else {
-            parseTags(tags, tagList);
+            Helper.parseTags(tags, tagList);
         }
         System.out.println("TAGS : ");
         for (String s : tagList) {
             System.out.println(s);
         }
         HashMap<String, Object> map = new HashMap<>();
-        map.put("posts", PostDao.search(pattern, tagList));
+        List<Post> posts = PostDao.search(pattern, tagList);
+        for (Post post : posts) {
+            System.out.println("post = " + post);
+        }
+        map.put("posts", posts);
         try {
             res = Render.render(map, "post_body.ftl");
         } catch (TemplateException e) {
@@ -61,7 +65,4 @@ public class SearchAjaxServlet extends HttpServlet {
         resp.getWriter().close();
     }
 
-    private void parseTags(String tags, List<String> tagList) {
-        tagList.addAll(Arrays.asList(tags.split(" *#")));
     }
-}

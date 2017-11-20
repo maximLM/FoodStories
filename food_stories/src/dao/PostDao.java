@@ -5,12 +5,11 @@ import entities.Comment;
 import entities.Post;
 import entities.Tag;
 import entities.User;
+import main_package.Helper;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
+import java.sql.Date;
+import java.util.*;
 
 import static main_package.Helper.toCalendar;
 
@@ -96,6 +95,7 @@ public class PostDao {
 
 
     public static List<Post> search(String pattern, List<String> tags) {
+
         String query = "SELECT P6.post_id, P6._text, P6._date, P6.likes, P6.user_id, P6.login, P6.photo FROM\n" +
                 "(\n" +
                 "  (\n" +
@@ -201,7 +201,11 @@ SELECT P6.post_id, P6._text, P6._date, P6.likes, P6.user_id, P6.login, P6.photo 
                                 rs.getString(7)
                         )
                 );
+                ret.get(ret.size() - 1).setPhotos(getPhotoByPost(
+                        ret.get(ret.size() - 1)
+                ));
             }
+            Collections.reverse(ret);
             return ret;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -226,5 +230,89 @@ SELECT P6.post_id, P6._text, P6._date, P6.likes, P6.user_id, P6.login, P6.photo 
             e.printStackTrace();
         }
 
+    }
+
+    public static Post createPost(Post post) {
+        Connection conn = DBConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "INSERT INTO \"post\"(_text, _date, likes)\n" +
+                            "    VALUES\n" +
+                            "      (?, ?, ?)"
+            );
+            java.sql.Date date = Helper.toDate(post.getDate());
+            ps.setString(1, post.getText());
+            ps.setDate(2, date);
+            ps.setInt(3, post.getLikes());
+            ps.executeUpdate();
+            ps = conn.prepareStatement(
+                    "SELECT * FROM \"post\"\n" +
+                            "WHERE \"post\".id = (" +
+                            "SELECT max(id) FROM \"post\"" +
+                            ")"
+            );
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) post = new Post(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    toCalendar(rs.getDate(3)),
+                    rs.getInt(4)
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return post;
+    }
+
+    public static void addTag(Post post, Tag tag) {
+        Connection conn = DBConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "INSERT INTO \"post_tags\" (post_id, tag_id)\n" +
+                            "VALUES(?, ?)"
+            );
+            ps.setInt(1, post.getId());
+            ps.setInt(2, tag.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<String> getPhotoByPost(Post post) {
+        Connection conn = DBConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT \"post_photo\".photo FROM \"post_photo\"\n" +
+                            "WHERE \"post_photo\".post_id = ?"
+            );
+            ps.setInt(1, post.getId());
+            ResultSet rs = ps.executeQuery();
+            ArrayList<String> ret = new ArrayList<>();
+            while (rs.next()) {
+                ret.add(rs.getString(1));
+            }
+            return ret;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public static void addPhoto(Post post, String photo) {
+        Connection conn = DBConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "INSERT INTO \"post_photo\" (post_id, photo) VALUES\n" +
+                            "(?, ?)"
+            );
+            ps.setInt(1, post.getId());
+            ps.setString(2,photo);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

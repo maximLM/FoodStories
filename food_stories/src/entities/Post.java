@@ -10,7 +10,7 @@ public class Post {
     private Calendar date;
     private User author;
     private int likes;
-    private List<Photo> photos;
+    private List<String> photos;
     private List<Tag> tags;
     private List<Comment> comments;
 
@@ -61,11 +61,11 @@ public class Post {
         this.likes = likes;
     }
 
-    public List<Photo> getPhotos() {
+    public List<String> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(List<Photo> photos) {
+    public void setPhotos(List<String> photos) {
         this.photos = photos;
     }
 

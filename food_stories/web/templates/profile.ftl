@@ -61,7 +61,7 @@
 </nav>
 
 <div class="container" >
-    <div  align="center"> <img alt="User Pic" src="/kek.jpg"" id="profile-image1" class="img-circle img-responsive">
+    <div  align="center"> <img alt="User Pic" src="/load/${user.photo}" id="profile-image1" class="img-circle img-responsive">
 
         <div style="color:#999;" >Изменить аватар</div>
         <!--Upload Image Js And Css-->

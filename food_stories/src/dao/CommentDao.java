@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static dao.UserDao.toDate;
+import static main_package.Helper.toDate;
 import static main_package.Helper.toCalendar;
 
 public class CommentDao {

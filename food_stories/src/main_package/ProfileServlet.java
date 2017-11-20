@@ -47,28 +47,10 @@ public class ProfileServlet extends HttpServlet {
             return;
         }
         Part part = req.getPart("photo");
-        String filePath = Helper.ROOT_OF_SERVER + "/pics/" + user.getId() + "DIVIDER_" +
+        String photo = user.getId() + "DIVIDER_" +
                 System.currentTimeMillis() + ".jpg";
-        OutputStream out = null;
-        InputStream in = null;
-        try {
-            out = new FileOutputStream(new File(filePath));
-            in = part.getInputStream();
-            final byte[] bytes = new byte[1024];
-            int read;
-            while ((read = in.read(bytes)) != -1) {
-                out.write(bytes, 0, read);
-            }
-        } catch(FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (out != null) {
-                out.close();
-            }
-            if (in != null) {
-                in.close();
-            }
-        }
+        Helper.loadPhoto(photo, part.getInputStream());
+
         user = new User(
                 user.getId(),
                 login,
@@ -79,7 +61,7 @@ public class ProfileServlet extends HttpServlet {
                 city,
                 user.getRegister(),
                 user.isAdmin(),
-                filePath
+                photo
         );
         UserDao.updateUser(user);
         req.getSession().setAttribute(CURRENT_USER_KEY, user);

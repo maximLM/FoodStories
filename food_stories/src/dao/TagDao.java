@@ -57,4 +57,39 @@ public class TagDao {
         }
         return null;
     }
+
+    public static Tag getTagByName(String tag) {
+        Connection conn = DBConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT * FROM \"tag\"\n " +
+                            "WHERE \"tag\".tag = ?"
+            );
+            ps.setString(1,tag);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+                return new Tag(rs.getInt(1),
+                        rs.getString(2));
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Tag createTag(String s) {
+        Connection conn = DBConnection.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                    "INSERT INTO \"tag\"(tag) \n" +
+                            "VALUES(?)"
+            );
+            ps.setString(1,s);
+            ps.executeUpdate();
+            return getTagByName(s);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

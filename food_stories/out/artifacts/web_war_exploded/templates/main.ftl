@@ -69,7 +69,7 @@
 
     <div class="row justify-content-end">
 
-        <div class="col-lg-2 col" style="position:absolute">
+        <div class="col-lg-2 col" style="position:fixed; width: 15% ">
             <div class="list-group">
                 <div class="thumbnail">
                     <a href="#">
@@ -98,480 +98,94 @@
             </div>
             </div>
         </div>
-        <div class="col-lg-8 col">
+        <div class="col-lg-8 " style="margin-left:15%">
 
             <div class="container">
+            <#list posts as post>
             <div class="box image">
                 <div class="box-header">
-                    <h3><a href=""><img src="https://goo.gl/oOD0V2" alt="" />Roswell Parian</a>
+                    <h3><a href=""><img src="/load/${post.author.photo}" alt="" />${post.author.login}</a>
                         <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
                     </h3>
-                    <span><i class="glyphicon glyphicon-edit"></i></span>
+                    <span><i class="glyphicon glyphicon-edit" onclick="location.href = '/post?id=${post.id}';"></i></span>
                     <div class="window"><span></span></div>
                 </div>
                 <div class="box-content">
+                    <#if post.photos?size = 0>
+
+                    <#else>
                     <div class="container">
-                        <div id="myCarousel1" class="carousel slide" data-ride="carousel">
+
+                        <div id="myCarousel${post.id}" class="carousel slide" data-ride="carousel">
                             <!-- Indicators -->
                             <ol class="carousel-indicators">
-                                <li data-target="#myCarousel1" data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel1" data-slide-to="1"></li>
-                                <li data-target="#myCarousel1" data-slide-to="2"></li>
+                                <li data-target="#myCarousel${post.id}" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel${post.id}" data-slide-to="1"></li>
+                                <li data-target="#myCarousel${post.id}" data-slide-to="2"></li>
                             </ol>
 
+                            <#assign flag = 0>
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
-
-                                <div class="item active">
-                                    <img src="static/photos/meat.jpg" alt="Los Angeles" style="width:100%;">
+                                <#list post.photos as photo>
+                                    <#if flag = 0>
+                                    <div class="item active">
+                                    <#else>
+                                    <div class="item">
+                                    </#if>
+                                    <#assign flag = 1>
+                                    <img src="/load/${photo}" alt="Los Angeles" style="width:100%;">
                                     <div class="carousel-caption">
                                         <h3>Los Angeles</h3>
                                         <p>LA is always so much fun!</p>
                                     </div>
                                 </div>
-
-                                <div class="item">
-                                    <img src="static/photos/meat.jpg" alt="Chicago" style="width:100%;">
-                                    <div class="carousel-caption">
-                                        <h3>Chicago</h3>
-                                        <p>Thank you, Chicago!</p>
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <img src="static/photos/ny.jpg" alt="New York" style="width:100%;">
-                                    <div class="carousel-caption">
-                                        <h3>New York</h3>
-                                        <p>We love the Big Apple!</p>
-                                    </div>
-                                </div>
+                                </#list>
 
                             </div>
 
-                            <!-- Left and right controls -->
-                            <a class="left carousel-control" href="#myCarousel1" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="right carousel-control" href="#myCarousel1" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
+                                <!-- Left and right controls -->
+                                <a class="left carousel-control" href="#myCarousel${post.id}" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel${post.id}" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    </#if>
                     <div class="bottom">
-                        <p>The life is much more interesant, when you remmenber the last time</p>
+                        <p>${post.text}</p>
                     </div>
-                    <div class = "container" style="width:100%;height:50px;float:left;overflow-x:scroll;white-space:nowrap; text-align: center">
-                        <div class = "tag">
-                            <a href="#">like</a>
-                        </div>
-                        <div class = "tag">
-                            <a href="#">like</a>
-                        </div>
-                        <div class = "tag">
-                            <a href="#">like</a>
-                        </div>
-                        <div class = "tag">
-                            <a href="#">like</a>
-                        </div>
-                        <div class = "tag">
-                            <a href="#">like</a>
-                        </div>
-                        <div class = "tag">
-                            <a href="#">like</a>
-                        </div>
-                        <div class = "tag">
-                            <a href="#">like</a>
-                        </div>
-                        <div class = "tag">
-                            <a href="#">like</a>
-                        </div>
-                        <div class = "tag">
-                            <a href="#">like</a>
-                        </div>
-                        <div class = "tag">
-                            <a href="#">like</a>
-                        </div>
-                        <div class = "tag">
-                            <a href="#">like</a>
-                        </div>
-                        <div class = "tag">
-                            <a href="#">like</a>
-                        </div>
-                        <div class = "tag">
-                            <a href="#">like</a>
-                        </div>
 
-
-                    </div>
                 </div>
-
-
-                <div class="box-buttons">
-                    <div class="row">
-                        <button><span class="glyphicon glyphicon-heart"> </span> 99</button>
-                        <button>145 <span class="glyphicon glyphicon-comment"></span></button>
-                    </div>
-                </div>
-
-
-            </div>
-                <div class="box image">
-                    <div class="box-header">
-                        <h3><a href=""><img src="https://goo.gl/oOD0V2" alt="" />Roswell Parian</a>
-                            <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
-                        </h3>
-                        <span><i class="glyphicon glyphicon-edit"></i></span>
-                        <div class="window"><span></span></div>
-                    </div>
-                    <div class="box-content">
-                        <div class="container">
-                            <div id="myCarousel2" class="carousel slide" data-ride="carousel">
-                                <!-- Indicators -->
-                                <ol class="carousel-indicators">
-                                    <li data-target="#myCarousel2" data-slide-to="0" class="active"></li>
-                                    <li data-target="#myCarousel2" data-slide-to="1"></li>
-                                    <li data-target="#myCarousel2" data-slide-to="2"></li>
-                                </ol>
-
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner">
-
-                                    <div class="item active">
-                                        <img src="static/photos/meat.jpg" alt="Los Angeles" style="width:100%;">
-                                        <div class="carousel-caption">
-                                            <h3>Los Angeles</h3>
-                                            <p>LA is always so much fun!</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="item">
-                                        <img src="static/photos/chicago.jpg" alt="Chicago" style="width:100%;">
-                                        <div class="carousel-caption">
-                                            <h3>Chicago</h3>
-                                            <p>Thank you, Chicago!</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="item">
-                                        <img src="static/photos/ny.jpg" alt="New York" style="width:100%;">
-                                        <div class="carousel-caption">
-                                            <h3>New York</h3>
-                                            <p>We love the Big Apple!</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <!-- Left and right controls -->
-                                <a class="left carousel-control" href="#myCarousel2" data-slide="prev">
-                                    <span class="glyphicon glyphicon-chevron-left"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#myCarousel2" data-slide="next">
-                                    <span class="glyphicon glyphicon-chevron-right"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="bottom">
-                            <p>The life is much more interesant, when you remmenber the last time</p>
-                        </div>
-                        <div class = "container" style="width:100%;height:50px;float:left;overflow-x:scroll;white-space:nowrap; text-align: center">
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-
-
-                        </div>
-                    </div>
 
 
                     <div class="box-buttons">
                         <div class="row">
-                            <button><span class="glyphicon glyphicon-heart"> </span> 99</button>
+                            <button><span class="glyphicon glyphicon-heart"> </span> ${post.likes}</button>
                             <button>145 <span class="glyphicon glyphicon-comment"></span></button>
                         </div>
                     </div>
 
 
                 </div>
-                <div class="box image">
-                    <div class="box-header">
-                        <h3><a href=""><img src="https://goo.gl/oOD0V2" alt="" />Roswell Parian</a>
-                            <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
-                        </h3>
-                        <span><i class="glyphicon glyphicon-edit"></i></span>
-                        <div class="window"><span></span></div>
-                    </div>
-                    <div class="box-content">
-                        <div class="container">
-                            <div id="myCarousel3" class="carousel slide" data-ride="carousel">
-                                <!-- Indicators -->
-                                <ol class="carousel-indicators">
-                                    <li data-target="#myCarousel3" data-slide-to="0" class="active"></li>
-                                    <li data-target="#myCarousel3" data-slide-to="1"></li>
-                                    <li data-target="#myCarousel3" data-slide-to="2"></li>
-                                </ol>
 
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner">
+            </#list>
 
-                                    <div class="item active">
-                                        <img src="static/photos/la.jpg" alt="Los Angeles" style="width:100%;">
-                                        <div class="carousel-caption">
-                                            <h3>Los Angeles</h3>
-                                            <p>LA is always so much fun!</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="item">
-                                        <img src="static/photos/chicago.jpg" alt="Chicago" style="width:100%;">
-                                        <div class="carousel-caption">
-                                            <h3>Chicago</h3>
-                                            <p>Thank you, Chicago!</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="item">
-                                        <img src="static/photos/ny.jpg" alt="New York" style="width:100%;">
-                                        <div class="carousel-caption">
-                                            <h3>New York</h3>
-                                            <p>We love the Big Apple!</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <!-- Left and right controls -->
-                                <a class="left carousel-control" href="#myCarousel3" data-slide="prev">
-                                    <span class="glyphicon glyphicon-chevron-left"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#myCarousel3" data-slide="next">
-                                    <span class="glyphicon glyphicon-chevron-right"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="bottom">
-                            <p>The life is much more interesant, when you remmenber the last time</p>
-                        </div>
-                        <div class = "container" style="width:100%;height:50px;float:left;overflow-x:scroll;white-space:nowrap; text-align: center">
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-
-                    <div class="box-buttons">
-                        <div class="row">
-                            <button><span class="glyphicon glyphicon-heart"> </span> 99</button>
-                            <button>145 <span class="glyphicon glyphicon-comment"></span></button>
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="box image">
-                    <div class="box-header">
-                        <h3><a href=""><img src="https://goo.gl/oOD0V2" alt="" />Roswell Parian</a>
-                            <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
-                        </h3>
-                        <span><i class="glyphicon glyphicon-edit"></i></span>
-                        <div class="window"><span></span></div>
-                    </div>
-                    <div class="box-content">
-                        <div class="container">
-                            <div id="myCarousel4" class="carousel slide" data-ride="carousel">
-                                <!-- Indicators -->
-                                <ol class="carousel-indicators">
-                                    <li data-target="#myCarousel4" data-slide-to="0" class="active"></li>
-                                    <li data-target="#myCarousel4" data-slide-to="1"></li>
-                                    <li data-target="#myCarousel4" data-slide-to="2"></li>
-                                </ol>
-
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner">
-
-                                    <div class="item active">
-                                        <img src="static/photos/la.jpg" alt="Los Angeles" style="width:100%;">
-                                        <div class="carousel-caption">
-                                            <h3>Los Angeles</h3>
-                                            <p>LA is always so much fun!</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="item">
-                                        <img src="static/photos/chicago.jpg" alt="Chicago" style="width:100%;">
-                                        <div class="carousel-caption">
-                                            <h3>Chicago</h3>
-                                            <p>Thank you, Chicago!</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="item">
-                                        <img src="static/photos/ny.jpg" alt="New York" style="width:100%;">
-                                        <div class="carousel-caption">
-                                            <h3>New York</h3>
-                                            <p>We love the Big Apple!</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <!-- Left and right controls -->
-                                <a class="left carousel-control" href="#myCarousel4" data-slide="prev">
-                                    <span class="glyphicon glyphicon-chevron-left"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#myCarousel4" data-slide="next">
-                                    <span class="glyphicon glyphicon-chevron-right"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="bottom">
-                            <p>The life is much more interesant, when you remmenber the last time</p>
-                        </div>
-                        <div class = "container" style="width:100%;height:50px;float:left;overflow-x:scroll;white-space:nowrap; text-align: center">
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-
-                    <div class="box-buttons">
-                        <div class="row">
-                            <button><span class="glyphicon glyphicon-heart"> </span> 99</button>
-                            <button>145 <span class="glyphicon glyphicon-comment"></span></button>
-                        </div>
-                    </div>
-
-
-                </div>
             </div>
         </div>
-        <div class="col-lg-2 col" >
+        <div class="col-lg-2 col-lg-offset-10" style="position:fixed; width: 15%; margin-left:80% ">
             <div class="list-group">
-                <a href="#" class="list-group-item active">#tag1</a>
-                <a href="#" class="list-group-item">#tag2</a>
-                <a href="#" class="list-group-item">#tag3</a>
+            <#list pop_tags as pop_tag>
+            <#if pop_tag.tag == active_tag.tag>
+                <a href="/main?tag=${pop_tag.tag}" class="list-group-item-active">#${pop_tag.tag}</a>
+            <#else>
+                <a href="/main?tag=${pop_tag.tag}" class="list-group-item">#${pop_tag.tag}</a>
+            </#if>
+            </#list>
             </div>
         </div>
     </div>

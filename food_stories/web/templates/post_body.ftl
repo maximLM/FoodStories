@@ -1,14 +1,18 @@
 <#list posts as post>
                 <div class="box image">
                     <div class="box-header">
-                        <h3><a href=""><img src="${post.author.photo}" alt="" />${post.author.login}</a>
+                        <h3><a href=""><img src="/load/${post.author.photo}" alt="" />${post.author.login}</a>
                             <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
                         </h3>
                         <span><i class="glyphicon glyphicon-edit" onclick="location.href = '/post?id=${post.id}';"></i></span>
                         <div class="window"><span></span></div>
                     </div>
                     <div class="box-content">
+                        <#if post.photos?size = 0>
+
+                        <#else>
                         <div class="container">
+
                             <div id="myCarousel${post.id}" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
                                 <ol class="carousel-indicators">
@@ -17,32 +21,23 @@
                                     <li data-target="#myCarousel${post.id}" data-slide-to="2"></li>
                                 </ol>
 
+                                <#assign flag = 0>
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner">
-
+                                    <#list post.photos as photo>
+                                    <#if flag = 0>
                                     <div class="item active">
-                                        <img src="static/photos/meat.jpg" alt="Los Angeles" style="width:100%;">
+                                    <#else>
+                                    <div class="item">
+                                    </#if>
+                                    <#assign flag = 1>
+                                        <img src="/load/${photo}" alt="Los Angeles" style="width:100%;">
                                         <div class="carousel-caption">
                                             <h3>Los Angeles</h3>
                                             <p>LA is always so much fun!</p>
                                         </div>
                                     </div>
-
-                                    <div class="item">
-                                        <img src="static/photos/meat.jpg" alt="Chicago" style="width:100%;">
-                                        <div class="carousel-caption">
-                                            <h3>Chicago</h3>
-                                            <p>Thank you, Chicago!</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="item">
-                                        <img src="static/photos/ny.jpg" alt="New York" style="width:100%;">
-                                        <div class="carousel-caption">
-                                            <h3>New York</h3>
-                                            <p>We love the Big Apple!</p>
-                                        </div>
-                                    </div>
+                                    </#list>
 
                                 </div>
 
@@ -57,6 +52,7 @@
                                 </a>
                             </div>
                         </div>
+                        </#if>
                         <div class="bottom">
                             <p>${post.text}</p>
                         </div>
