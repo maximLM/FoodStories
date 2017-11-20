@@ -82,6 +82,8 @@
 
             <div class="box-content">
                 <div class="container">
+                    <#if post.photos?size = 0>
+                    <#else>
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
                         <!-- Indicators -->
                         <ol class="carousel-indicators">
@@ -122,6 +124,7 @@
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
+                    </#if>
                 </div>
                 <div class="bottom">
                     <p>${post.text}</p>

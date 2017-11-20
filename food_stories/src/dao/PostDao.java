@@ -63,6 +63,11 @@ public class PostDao {
                         toCalendar(resultSet.getDate(3)),
                         resultSet.getInt(4)
                 ));
+                posts.get(posts.size() - 1).setPhotos(
+                        PostDao.getPhotoByPost(
+                                posts.get(posts.size() - 1)
+                        )
+                );
             }
             return posts;
         } catch (SQLException e) {

@@ -71,15 +71,14 @@
     <div class="row justify-content-end">
         <div class="col-lg-2 col">
             <div class="container" >
-            <div  align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+            <div  align="center"> <img alt="User Pic" src="/load/${user.photo}" id="profile-image1" class="img-circle img-responsive">
             </div>
             </div>
         </div>
         <div class="col-lg-8 col">
             <div class="container" align="center">
-                <h3><span class="label label-info">Имя </span>Владислав Каширин</h3>
-                <h3><span class="label label-info">Город  </span>Иркутск</h3>
-                <h3><span class="label label-info">Любимая еда  </span>Любимая еда</h3>
+                <h3><span class="label label-info">Имя </span>${user.name}</h3>
+                <h3><span class="label label-info">Город  </span>${user.city}</h3>
                 </div>
             </div>
         </div>
@@ -87,204 +86,79 @@
         <div class="row justify-content-end">
         <div class="col-lg-8 col-lg-offset-2">
             <div class="container">
-                <div class="box image">
-                    <div class="box-header">
-                        <h3><a href=""><img src="https://goo.gl/oOD0V2" alt="" />Roswell Parian</a>
-                            <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
-                        </h3>
-                        <span><i class="glyphicon glyphicon-edit" id="edit-button"></i></span>
-                        <div class="window"><span></span></div>
-                    </div>
-                    <!-- <div class="container edit hidden">
-                            <input id="description-edit" type="text" class="description-edit" name="Описание" >
-                            -->
-                    <div class="box-content edit hidden" id="edit_container">
+            <#list posts as post>
+            <div class="box image">
+                <div class="box-header">
+                    <h3><a href=""><img src="/load/${user.photo}" alt="" />${user.login}</a>
+                        <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
+                    </h3>
+                    <span><i class="glyphicon glyphicon-edit" onclick="location.href = '/post?id=${post.id}';"></i></span>
+                    <div class="window"><span></span></div>
+                </div>
+                <div class="box-content">
+                    <#if post.photos?size = 0>
 
-                        <div class="form-group" >
-                            <div class="input-group input-file" name="Fichier1" >
-                            <span class="input-group-btn" style="box-sizing: border-box">
-                                <button class="btn btn-default btn-choose" type="button" >Choose</button>
-                            </span>
-                                <input type="text" class="form-control" placeholder='Choose a file...' style="box-sizing: border-box"/>
-                                <span class="input-group-btn">
-                                <button type="submit" class="btn btn-primary btn-submit" >Submit</button>
-                            </span>
-                            </div>
-                        </div>
+                    <#else>
+                    <div class="container">
 
-                        <form>
-                            <div class="form-group">
-                                <ul class="list-inline" id = "photo_links">
-                                    <li class="list-group-item list-group-item-info justify-content-between">
-                                        <div class="checkbox">
-                                            <label><input type="checkbox"> photo1</label>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-info justify-content-between">
-                                        <div class="checkbox">
-                                            <label><input type="checkbox"> photo1</label>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-info justify-content-between">
-                                        <div class="checkbox">
-                                            <label><input type="checkbox"> photo1</label>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item list-group-item-info justify-content-between">
-                                        <div class="checkbox">
-                                            <label><input type="checkbox"> photo1</label>
-                                        </div>
-                                    </li>
+                        <div id="myCarousel${post.id}" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel${post.id}" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel${post.id}" data-slide-to="1"></li>
+                                <li data-target="#myCarousel${post.id}" data-slide-to="2"></li>
+                            </ol>
 
-
-                                </ul>
-                            </div>
-
-                            <div class="form-group">
-                                <textarea class="form-control" rows="3" id="text" placeholder="Расскажи что-нибудь" ></textarea>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" rows="1" id="tags" placeholder="#tag1 #tag2"></textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary btn-submit" >Изменить пост</button>
-
-                        </form>
-                    </div>
-
-                    <div class="box-content">
-                        <div class="container">
-                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                                <!-- Indicators -->
-                                <ol class="carousel-indicators">
-                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                                </ol>
-
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner">
-
+                            <#assign flag = 0>
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <#list post.photos as photo>
+                                    <#if flag = 0>
                                     <div class="item active">
-                                        <img src="static/photos/meat.jpg" alt="Los Angeles" style="width:100%;">
-                                        <div class="carousel-caption">
-                                            <h3>Meat</h3>
-                                            <p>Pork is always so much fun!</p>
-                                        </div>
-                                    </div>
-
+                                    <#else>
                                     <div class="item">
-                                        <img src="static/photos/chicago.jpg" alt="Chicago" style="width:100%;">
-                                        <div class="carousel-caption">
-                                            <h3>Chicago</h3>
-                                            <p>Thank you, Chicago!</p>
-                                        </div>
+                                    </#if>
+                                    <#assign flag = 1>
+                                    <img src="/load/${photo}" alt="Los Angeles" style="width:100%;">
+                                    <div class="carousel-caption">
+                                        <h3>Los Angeles</h3>
+                                        <p>LA is always so much fun!</p>
                                     </div>
-
-                                    <div class="item">
-                                        <img src="static/photos/ny.jpg" alt="New York" style="width:100%;">
-                                        <div class="carousel-caption">
-                                            <h3>New York</h3>
-                                            <p>We love the Big Apple!</p>
-                                        </div>
-                                    </div>
-
                                 </div>
+                                </#list>
+
+                            </div>
 
                                 <!-- Left and right controls -->
-                                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                <a class="left carousel-control" href="#myCarousel${post.id}" data-slide="prev">
                                     <span class="glyphicon glyphicon-chevron-left"></span>
                                     <span class="sr-only">Previous</span>
                                 </a>
-                                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                <a class="right carousel-control" href="#myCarousel${post.id}" data-slide="next">
                                     <span class="glyphicon glyphicon-chevron-right"></span>
                                     <span class="sr-only">Next</span>
                                 </a>
                             </div>
                         </div>
-                        <div class="bottom">
-                            <p class="description">The life is much more interesting, when you eat meat</p>
-
-
-
-
-                        </div>
-                        <div class = "container" style="width:100%;height:50px;float:left;overflow-x:scroll;white-space:nowrap; text-align: center">
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-                            <div class = "tag">
-                                <a href="#">like</a>
-                            </div>
-
-
-                        </div>
+                    </#if>
+                    <div class="bottom">
+                        <p>${post.text}</p>
                     </div>
+
+                </div>
 
 
                     <div class="box-buttons">
                         <div class="row">
-                            <button><span class="glyphicon glyphicon-heart"> </span> 99</button>
+                            <button><span class="glyphicon glyphicon-heart"> </span> ${post.likes}</button>
                             <button>145 <span class="glyphicon glyphicon-comment"></span></button>
                         </div>
                     </div>
 
 
                 </div>
+
+            </#list>
             </div>
         </div>
     </div>
